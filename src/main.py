@@ -42,6 +42,11 @@ def cyan(text: str) -> str:
     config_name="main",
 )
 def train(cfg_dict: DictConfig):
+
+    # cfg_dict：保留 Hydra/OmegaConf 的灵活性。cfg_dict 更适合直接交给 WandB / Hydra / OmegaConf 工具
+    # cfg：转成项目定义好的 typed config，便于 IDE 补全和类型检查。cfg 更适合“业务逻辑读取”
+
+    # 把 Hydra 的动态配置转成“类型化配置”
     cfg = load_typed_root_config(cfg_dict)
     set_cfg(cfg_dict)
 
@@ -54,6 +59,8 @@ def train(cfg_dict: DictConfig):
         output_dir = Path(cfg_dict.output_dir)
         os.makedirs(output_dir, exist_ok=True)
     print(cyan(f"Saving outputs to {output_dir}."))
+
+    # 方便快速找到最近一次实验。
     latest_run = output_dir.parents[1] / "latest-run"
     os.system(f"rm {latest_run}")
     os.system(f"ln -s {output_dir} {latest_run}")
@@ -119,6 +126,7 @@ def train(cfg_dict: DictConfig):
     )
     torch.manual_seed(cfg_dict.seed + trainer.global_rank)
 
+    # 前馈多视图特征抽取 / 匹配相关逻辑通常入口在这里
     encoder, encoder_visualizer = get_encoder(cfg.model.encoder)
 
     model_kwargs = {
@@ -127,10 +135,14 @@ def train(cfg_dict: DictConfig):
         "train_cfg": cfg.train,
         "encoder": encoder,
         "encoder_visualizer": encoder_visualizer,
-        "decoder": get_decoder(cfg.model.decoder, cfg.dataset),
+        "decoder": get_decoder(cfg.model.decoder, cfg.dataset), # 输出 3DGS / 深度 / 体素 / plane / splat 相关参数的关键模块多半在这里挂进去
         "losses": get_losses(cfg.loss),
         "step_tracker": step_tracker,
     }
+
+    # ModelWrapper
+    # 经常是 LightningModule 的封装层
+    # 训练 step / test step / metric 统计 / render 调用 很可能都在里面
     if cfg.mode == "train" and checkpoint_path is not None and not cfg.checkpointing.resume:
         # Just load model weights, without optimizer states
         # e.g., fine-tune from the released weights on other datasets
@@ -160,6 +172,7 @@ def train(cfg_dict: DictConfig):
 
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
+    # 训练速度
     torch.set_float32_matmul_precision('high')
 
     train()

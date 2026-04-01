@@ -54,7 +54,7 @@ def worker_init_fn(worker_id: int) -> None:
     random.seed(int(torch.utils.data.get_worker_info().seed) % (2**32 - 1))
     np.random.seed(int(torch.utils.data.get_worker_info().seed) % (2**32 - 1))
 
-
+# 把 dataset_cfg + data_loader_cfg 变成 PyTorch Lightning 能消费的 dataloader。
 class DataModule(LightningDataModule):
     dataset_cfg: DatasetCfg
     data_loader_cfg: DataLoaderCfg
@@ -71,7 +71,7 @@ class DataModule(LightningDataModule):
         global_rank: int = 0,
     ) -> None:
         super().__init__()
-        self.dataset_cfg = dataset_cfg
+        self.dataset_cfg = dataset_cfg # “该加载哪个数据集、以什么方式构造数据集对象” 的配置入口。
         self.data_loader_cfg = data_loader_cfg
         self.step_tracker = step_tracker
         self.dataset_shim = dataset_shim
@@ -119,6 +119,7 @@ class DataModule(LightningDataModule):
             self.step_tracker,
         )
         dataset = self.dataset_shim(dataset, "test")
+        print(">>> DataModule.test_dataloader called")
         return DataLoader(
             dataset,
             self.data_loader_cfg.test.batch_size,

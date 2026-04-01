@@ -1,0 +1,4502 @@
+{
+  "rgbd_bonn_static_0000": {
+    "context": [
+      0,
+      10
+    ],
+    "target": [
+      5
+    ]
+  },
+  "rgbd_bonn_static_0001": {
+    "context": [
+      10,
+      20
+    ],
+    "target": [
+      15
+    ]
+  },
+  "rgbd_bonn_static_0002": {
+    "context": [
+      20,
+      30
+    ],
+    "target": [
+      25
+    ]
+  },
+  "rgbd_bonn_static_0003": {
+    "context": [
+      30,
+      40
+    ],
+    "target": [
+      35
+    ]
+  },
+  "rgbd_bonn_static_0004": {
+    "context": [
+      40,
+      50
+    ],
+    "target": [
+      45
+    ]
+  },
+  "rgbd_bonn_static_0005": {
+    "context": [
+      50,
+      60
+    ],
+    "target": [
+      55
+    ]
+  },
+  "rgbd_bonn_static_0006": {
+    "context": [
+      60,
+      70
+    ],
+    "target": [
+      65
+    ]
+  },
+  "rgbd_bonn_static_0007": {
+    "context": [
+      70,
+      80
+    ],
+    "target": [
+      75
+    ]
+  },
+  "rgbd_bonn_static_0008": {
+    "context": [
+      80,
+      90
+    ],
+    "target": [
+      85
+    ]
+  },
+  "rgbd_bonn_static_0009": {
+    "context": [
+      90,
+      100
+    ],
+    "target": [
+      95
+    ]
+  },
+  "rgbd_bonn_static_0010": {
+    "context": [
+      100,
+      110
+    ],
+    "target": [
+      105
+    ]
+  },
+  "rgbd_bonn_static_0011": {
+    "context": [
+      110,
+      120
+    ],
+    "target": [
+      115
+    ]
+  },
+  "rgbd_bonn_static_0012": {
+    "context": [
+      120,
+      130
+    ],
+    "target": [
+      125
+    ]
+  },
+  "rgbd_bonn_static_0013": {
+    "context": [
+      130,
+      140
+    ],
+    "target": [
+      135
+    ]
+  },
+  "rgbd_bonn_static_0014": {
+    "context": [
+      140,
+      150
+    ],
+    "target": [
+      145
+    ]
+  },
+  "rgbd_bonn_static_0015": {
+    "context": [
+      150,
+      160
+    ],
+    "target": [
+      155
+    ]
+  },
+  "rgbd_bonn_static_0016": {
+    "context": [
+      160,
+      170
+    ],
+    "target": [
+      165
+    ]
+  },
+  "rgbd_bonn_static_0017": {
+    "context": [
+      170,
+      180
+    ],
+    "target": [
+      175
+    ]
+  },
+  "rgbd_bonn_static_0018": {
+    "context": [
+      180,
+      190
+    ],
+    "target": [
+      185
+    ]
+  },
+  "rgbd_bonn_static_0019": {
+    "context": [
+      190,
+      200
+    ],
+    "target": [
+      195
+    ]
+  },
+  "rgbd_bonn_static_0020": {
+    "context": [
+      200,
+      210
+    ],
+    "target": [
+      205
+    ]
+  },
+  "rgbd_bonn_static_0021": {
+    "context": [
+      210,
+      220
+    ],
+    "target": [
+      215
+    ]
+  },
+  "rgbd_bonn_static_0022": {
+    "context": [
+      220,
+      230
+    ],
+    "target": [
+      225
+    ]
+  },
+  "rgbd_bonn_static_0023": {
+    "context": [
+      230,
+      240
+    ],
+    "target": [
+      235
+    ]
+  },
+  "rgbd_bonn_static_0024": {
+    "context": [
+      240,
+      250
+    ],
+    "target": [
+      245
+    ]
+  },
+  "rgbd_bonn_static_0025": {
+    "context": [
+      250,
+      260
+    ],
+    "target": [
+      255
+    ]
+  },
+  "rgbd_bonn_static_0026": {
+    "context": [
+      260,
+      270
+    ],
+    "target": [
+      265
+    ]
+  },
+  "rgbd_bonn_static_0027": {
+    "context": [
+      270,
+      280
+    ],
+    "target": [
+      275
+    ]
+  },
+  "rgbd_bonn_static_0028": {
+    "context": [
+      280,
+      290
+    ],
+    "target": [
+      285
+    ]
+  },
+  "rgbd_bonn_static_0029": {
+    "context": [
+      290,
+      300
+    ],
+    "target": [
+      295
+    ]
+  },
+  "rgbd_bonn_static_0030": {
+    "context": [
+      300,
+      310
+    ],
+    "target": [
+      305
+    ]
+  },
+  "rgbd_bonn_static_0031": {
+    "context": [
+      310,
+      320
+    ],
+    "target": [
+      315
+    ]
+  },
+  "rgbd_bonn_static_0032": {
+    "context": [
+      320,
+      330
+    ],
+    "target": [
+      325
+    ]
+  },
+  "rgbd_bonn_static_0033": {
+    "context": [
+      330,
+      340
+    ],
+    "target": [
+      335
+    ]
+  },
+  "rgbd_bonn_static_0034": {
+    "context": [
+      340,
+      350
+    ],
+    "target": [
+      345
+    ]
+  },
+  "rgbd_bonn_static_0035": {
+    "context": [
+      350,
+      360
+    ],
+    "target": [
+      355
+    ]
+  },
+  "rgbd_bonn_static_0036": {
+    "context": [
+      360,
+      370
+    ],
+    "target": [
+      365
+    ]
+  },
+  "rgbd_bonn_static_0037": {
+    "context": [
+      370,
+      380
+    ],
+    "target": [
+      375
+    ]
+  },
+  "rgbd_bonn_static_0038": {
+    "context": [
+      380,
+      390
+    ],
+    "target": [
+      385
+    ]
+  },
+  "rgbd_bonn_static_0039": {
+    "context": [
+      390,
+      400
+    ],
+    "target": [
+      395
+    ]
+  },
+  "rgbd_bonn_static_0040": {
+    "context": [
+      400,
+      410
+    ],
+    "target": [
+      405
+    ]
+  },
+  "rgbd_bonn_static_0041": {
+    "context": [
+      410,
+      420
+    ],
+    "target": [
+      415
+    ]
+  },
+  "rgbd_bonn_static_0042": {
+    "context": [
+      420,
+      430
+    ],
+    "target": [
+      425
+    ]
+  },
+  "rgbd_bonn_static_0043": {
+    "context": [
+      430,
+      440
+    ],
+    "target": [
+      435
+    ]
+  },
+  "rgbd_bonn_static_0044": {
+    "context": [
+      440,
+      450
+    ],
+    "target": [
+      445
+    ]
+  },
+  "rgbd_bonn_static_0045": {
+    "context": [
+      450,
+      460
+    ],
+    "target": [
+      455
+    ]
+  },
+  "rgbd_bonn_static_0046": {
+    "context": [
+      460,
+      470
+    ],
+    "target": [
+      465
+    ]
+  },
+  "rgbd_bonn_static_0047": {
+    "context": [
+      470,
+      480
+    ],
+    "target": [
+      475
+    ]
+  },
+  "rgbd_bonn_static_0048": {
+    "context": [
+      480,
+      490
+    ],
+    "target": [
+      485
+    ]
+  },
+  "rgbd_bonn_static_0049": {
+    "context": [
+      490,
+      500
+    ],
+    "target": [
+      495
+    ]
+  },
+  "rgbd_bonn_static_0050": {
+    "context": [
+      500,
+      510
+    ],
+    "target": [
+      505
+    ]
+  },
+  "rgbd_bonn_static_0051": {
+    "context": [
+      510,
+      520
+    ],
+    "target": [
+      515
+    ]
+  },
+  "rgbd_bonn_static_0052": {
+    "context": [
+      520,
+      530
+    ],
+    "target": [
+      525
+    ]
+  },
+  "rgbd_bonn_static_0053": {
+    "context": [
+      530,
+      540
+    ],
+    "target": [
+      535
+    ]
+  },
+  "rgbd_bonn_static_0054": {
+    "context": [
+      540,
+      550
+    ],
+    "target": [
+      545
+    ]
+  },
+  "rgbd_bonn_static_0055": {
+    "context": [
+      550,
+      560
+    ],
+    "target": [
+      555
+    ]
+  },
+  "rgbd_bonn_static_0056": {
+    "context": [
+      560,
+      570
+    ],
+    "target": [
+      565
+    ]
+  },
+  "rgbd_bonn_static_0057": {
+    "context": [
+      570,
+      580
+    ],
+    "target": [
+      575
+    ]
+  },
+  "rgbd_bonn_static_0058": {
+    "context": [
+      580,
+      590
+    ],
+    "target": [
+      585
+    ]
+  },
+  "rgbd_bonn_static_0059": {
+    "context": [
+      590,
+      600
+    ],
+    "target": [
+      595
+    ]
+  },
+  "rgbd_bonn_static_0060": {
+    "context": [
+      600,
+      610
+    ],
+    "target": [
+      605
+    ]
+  },
+  "rgbd_bonn_static_0061": {
+    "context": [
+      610,
+      620
+    ],
+    "target": [
+      615
+    ]
+  },
+  "rgbd_bonn_static_0062": {
+    "context": [
+      620,
+      630
+    ],
+    "target": [
+      625
+    ]
+  },
+  "rgbd_bonn_static_0063": {
+    "context": [
+      630,
+      640
+    ],
+    "target": [
+      635
+    ]
+  },
+  "rgbd_bonn_static_0064": {
+    "context": [
+      640,
+      650
+    ],
+    "target": [
+      645
+    ]
+  },
+  "rgbd_bonn_static_0065": {
+    "context": [
+      650,
+      660
+    ],
+    "target": [
+      655
+    ]
+  },
+  "rgbd_bonn_static_0066": {
+    "context": [
+      660,
+      670
+    ],
+    "target": [
+      665
+    ]
+  },
+  "rgbd_bonn_static_0067": {
+    "context": [
+      670,
+      680
+    ],
+    "target": [
+      675
+    ]
+  },
+  "rgbd_bonn_static_0068": {
+    "context": [
+      680,
+      690
+    ],
+    "target": [
+      685
+    ]
+  },
+  "rgbd_bonn_static_0069": {
+    "context": [
+      690,
+      700
+    ],
+    "target": [
+      695
+    ]
+  },
+  "rgbd_bonn_static_0070": {
+    "context": [
+      700,
+      710
+    ],
+    "target": [
+      705
+    ]
+  },
+  "rgbd_bonn_static_0071": {
+    "context": [
+      710,
+      720
+    ],
+    "target": [
+      715
+    ]
+  },
+  "rgbd_bonn_static_0072": {
+    "context": [
+      720,
+      730
+    ],
+    "target": [
+      725
+    ]
+  },
+  "rgbd_bonn_static_0073": {
+    "context": [
+      730,
+      740
+    ],
+    "target": [
+      735
+    ]
+  },
+  "rgbd_bonn_static_0074": {
+    "context": [
+      740,
+      750
+    ],
+    "target": [
+      745
+    ]
+  },
+  "rgbd_bonn_static_0075": {
+    "context": [
+      750,
+      760
+    ],
+    "target": [
+      755
+    ]
+  },
+  "rgbd_bonn_static_0076": {
+    "context": [
+      760,
+      770
+    ],
+    "target": [
+      765
+    ]
+  },
+  "rgbd_bonn_static_0077": {
+    "context": [
+      770,
+      780
+    ],
+    "target": [
+      775
+    ]
+  },
+  "rgbd_bonn_static_0078": {
+    "context": [
+      780,
+      790
+    ],
+    "target": [
+      785
+    ]
+  },
+  "rgbd_bonn_static_0079": {
+    "context": [
+      790,
+      800
+    ],
+    "target": [
+      795
+    ]
+  },
+  "rgbd_bonn_static_0080": {
+    "context": [
+      800,
+      810
+    ],
+    "target": [
+      805
+    ]
+  },
+  "rgbd_bonn_static_0081": {
+    "context": [
+      810,
+      820
+    ],
+    "target": [
+      815
+    ]
+  },
+  "rgbd_bonn_static_0082": {
+    "context": [
+      820,
+      830
+    ],
+    "target": [
+      825
+    ]
+  },
+  "rgbd_bonn_static_0083": {
+    "context": [
+      830,
+      840
+    ],
+    "target": [
+      835
+    ]
+  },
+  "rgbd_bonn_static_0084": {
+    "context": [
+      840,
+      850
+    ],
+    "target": [
+      845
+    ]
+  },
+  "rgbd_bonn_static_0085": {
+    "context": [
+      850,
+      860
+    ],
+    "target": [
+      855
+    ]
+  },
+  "rgbd_bonn_static_0086": {
+    "context": [
+      860,
+      870
+    ],
+    "target": [
+      865
+    ]
+  },
+  "rgbd_bonn_static_0087": {
+    "context": [
+      870,
+      880
+    ],
+    "target": [
+      875
+    ]
+  },
+  "rgbd_bonn_static_0088": {
+    "context": [
+      880,
+      890
+    ],
+    "target": [
+      885
+    ]
+  },
+  "rgbd_bonn_static_0089": {
+    "context": [
+      890,
+      900
+    ],
+    "target": [
+      895
+    ]
+  },
+  "rgbd_bonn_static_0090": {
+    "context": [
+      900,
+      910
+    ],
+    "target": [
+      905
+    ]
+  },
+  "rgbd_bonn_static_0091": {
+    "context": [
+      910,
+      920
+    ],
+    "target": [
+      915
+    ]
+  },
+  "rgbd_bonn_static_0092": {
+    "context": [
+      920,
+      930
+    ],
+    "target": [
+      925
+    ]
+  },
+  "rgbd_bonn_static_0093": {
+    "context": [
+      930,
+      940
+    ],
+    "target": [
+      935
+    ]
+  },
+  "rgbd_bonn_static_0094": {
+    "context": [
+      940,
+      950
+    ],
+    "target": [
+      945
+    ]
+  },
+  "rgbd_bonn_static_0095": {
+    "context": [
+      950,
+      960
+    ],
+    "target": [
+      955
+    ]
+  },
+  "rgbd_bonn_static_0096": {
+    "context": [
+      960,
+      970
+    ],
+    "target": [
+      965
+    ]
+  },
+  "rgbd_bonn_static_0097": {
+    "context": [
+      970,
+      980
+    ],
+    "target": [
+      975
+    ]
+  },
+  "rgbd_bonn_static_0098": {
+    "context": [
+      980,
+      990
+    ],
+    "target": [
+      985
+    ]
+  },
+  "rgbd_bonn_static_0099": {
+    "context": [
+      990,
+      1000
+    ],
+    "target": [
+      995
+    ]
+  },
+  "rgbd_bonn_static_0100": {
+    "context": [
+      1000,
+      1010
+    ],
+    "target": [
+      1005
+    ]
+  },
+  "rgbd_bonn_static_0101": {
+    "context": [
+      1010,
+      1020
+    ],
+    "target": [
+      1015
+    ]
+  },
+  "rgbd_bonn_static_0102": {
+    "context": [
+      1020,
+      1030
+    ],
+    "target": [
+      1025
+    ]
+  },
+  "rgbd_bonn_static_0103": {
+    "context": [
+      1030,
+      1040
+    ],
+    "target": [
+      1035
+    ]
+  },
+  "rgbd_bonn_static_0104": {
+    "context": [
+      1040,
+      1050
+    ],
+    "target": [
+      1045
+    ]
+  },
+  "rgbd_bonn_static_0105": {
+    "context": [
+      1050,
+      1060
+    ],
+    "target": [
+      1055
+    ]
+  },
+  "rgbd_bonn_static_0106": {
+    "context": [
+      1060,
+      1070
+    ],
+    "target": [
+      1065
+    ]
+  },
+  "rgbd_bonn_static_0107": {
+    "context": [
+      1070,
+      1080
+    ],
+    "target": [
+      1075
+    ]
+  },
+  "rgbd_bonn_static_0108": {
+    "context": [
+      1080,
+      1090
+    ],
+    "target": [
+      1085
+    ]
+  },
+  "rgbd_bonn_static_0109": {
+    "context": [
+      1090,
+      1100
+    ],
+    "target": [
+      1095
+    ]
+  },
+  "rgbd_bonn_static_0110": {
+    "context": [
+      1100,
+      1110
+    ],
+    "target": [
+      1105
+    ]
+  },
+  "rgbd_bonn_static_0111": {
+    "context": [
+      1110,
+      1120
+    ],
+    "target": [
+      1115
+    ]
+  },
+  "rgbd_bonn_static_0112": {
+    "context": [
+      1120,
+      1130
+    ],
+    "target": [
+      1125
+    ]
+  },
+  "rgbd_bonn_static_0113": {
+    "context": [
+      1130,
+      1140
+    ],
+    "target": [
+      1135
+    ]
+  },
+  "rgbd_bonn_static_0114": {
+    "context": [
+      1140,
+      1150
+    ],
+    "target": [
+      1145
+    ]
+  },
+  "rgbd_bonn_static_0115": {
+    "context": [
+      1150,
+      1160
+    ],
+    "target": [
+      1155
+    ]
+  },
+  "rgbd_bonn_static_0116": {
+    "context": [
+      1160,
+      1170
+    ],
+    "target": [
+      1165
+    ]
+  },
+  "rgbd_bonn_static_0117": {
+    "context": [
+      1170,
+      1180
+    ],
+    "target": [
+      1175
+    ]
+  },
+  "rgbd_bonn_static_0118": {
+    "context": [
+      1180,
+      1190
+    ],
+    "target": [
+      1185
+    ]
+  },
+  "rgbd_bonn_static_0119": {
+    "context": [
+      1190,
+      1200
+    ],
+    "target": [
+      1195
+    ]
+  },
+  "rgbd_bonn_static_0120": {
+    "context": [
+      1200,
+      1210
+    ],
+    "target": [
+      1205
+    ]
+  },
+  "rgbd_bonn_static_0121": {
+    "context": [
+      1210,
+      1220
+    ],
+    "target": [
+      1215
+    ]
+  },
+  "rgbd_bonn_static_0122": {
+    "context": [
+      1220,
+      1230
+    ],
+    "target": [
+      1225
+    ]
+  },
+  "rgbd_bonn_static_0123": {
+    "context": [
+      1230,
+      1240
+    ],
+    "target": [
+      1235
+    ]
+  },
+  "rgbd_bonn_static_0124": {
+    "context": [
+      1240,
+      1250
+    ],
+    "target": [
+      1245
+    ]
+  },
+  "rgbd_bonn_static_0125": {
+    "context": [
+      1250,
+      1260
+    ],
+    "target": [
+      1255
+    ]
+  },
+  "rgbd_bonn_static_0126": {
+    "context": [
+      1260,
+      1270
+    ],
+    "target": [
+      1265
+    ]
+  },
+  "rgbd_bonn_static_0127": {
+    "context": [
+      1270,
+      1280
+    ],
+    "target": [
+      1275
+    ]
+  },
+  "rgbd_bonn_static_0128": {
+    "context": [
+      1280,
+      1290
+    ],
+    "target": [
+      1285
+    ]
+  },
+  "rgbd_bonn_static_0129": {
+    "context": [
+      1290,
+      1300
+    ],
+    "target": [
+      1295
+    ]
+  },
+  "rgbd_bonn_static_0130": {
+    "context": [
+      1300,
+      1310
+    ],
+    "target": [
+      1305
+    ]
+  },
+  "rgbd_bonn_static_0131": {
+    "context": [
+      1310,
+      1320
+    ],
+    "target": [
+      1315
+    ]
+  },
+  "rgbd_bonn_static_0132": {
+    "context": [
+      1320,
+      1330
+    ],
+    "target": [
+      1325
+    ]
+  },
+  "rgbd_bonn_static_0133": {
+    "context": [
+      1330,
+      1340
+    ],
+    "target": [
+      1335
+    ]
+  },
+  "rgbd_bonn_static_0134": {
+    "context": [
+      1340,
+      1350
+    ],
+    "target": [
+      1345
+    ]
+  },
+  "rgbd_bonn_static_0135": {
+    "context": [
+      1350,
+      1360
+    ],
+    "target": [
+      1355
+    ]
+  },
+  "rgbd_bonn_static_0136": {
+    "context": [
+      1360,
+      1370
+    ],
+    "target": [
+      1365
+    ]
+  },
+  "rgbd_bonn_static_0137": {
+    "context": [
+      1370,
+      1380
+    ],
+    "target": [
+      1375
+    ]
+  },
+  "rgbd_bonn_static_0138": {
+    "context": [
+      1380,
+      1390
+    ],
+    "target": [
+      1385
+    ]
+  },
+  "rgbd_bonn_static_0139": {
+    "context": [
+      1390,
+      1400
+    ],
+    "target": [
+      1395
+    ]
+  },
+  "rgbd_bonn_static_0140": {
+    "context": [
+      1400,
+      1410
+    ],
+    "target": [
+      1405
+    ]
+  },
+  "rgbd_bonn_static_0141": {
+    "context": [
+      1410,
+      1420
+    ],
+    "target": [
+      1415
+    ]
+  },
+  "rgbd_bonn_static_0142": {
+    "context": [
+      1420,
+      1430
+    ],
+    "target": [
+      1425
+    ]
+  },
+  "rgbd_bonn_static_0143": {
+    "context": [
+      1430,
+      1440
+    ],
+    "target": [
+      1435
+    ]
+  },
+  "rgbd_bonn_static_0144": {
+    "context": [
+      1440,
+      1450
+    ],
+    "target": [
+      1445
+    ]
+  },
+  "rgbd_bonn_static_0145": {
+    "context": [
+      1450,
+      1460
+    ],
+    "target": [
+      1455
+    ]
+  },
+  "rgbd_bonn_static_0146": {
+    "context": [
+      1460,
+      1470
+    ],
+    "target": [
+      1465
+    ]
+  },
+  "rgbd_bonn_static_0147": {
+    "context": [
+      1470,
+      1480
+    ],
+    "target": [
+      1475
+    ]
+  },
+  "rgbd_bonn_static_0148": {
+    "context": [
+      1480,
+      1490
+    ],
+    "target": [
+      1485
+    ]
+  },
+  "rgbd_bonn_static_0149": {
+    "context": [
+      1490,
+      1500
+    ],
+    "target": [
+      1495
+    ]
+  },
+  "rgbd_bonn_static_0150": {
+    "context": [
+      1500,
+      1510
+    ],
+    "target": [
+      1505
+    ]
+  },
+  "rgbd_bonn_static_0151": {
+    "context": [
+      1510,
+      1520
+    ],
+    "target": [
+      1515
+    ]
+  },
+  "rgbd_bonn_static_0152": {
+    "context": [
+      1520,
+      1530
+    ],
+    "target": [
+      1525
+    ]
+  },
+  "rgbd_bonn_static_0153": {
+    "context": [
+      1530,
+      1540
+    ],
+    "target": [
+      1535
+    ]
+  },
+  "rgbd_bonn_static_0154": {
+    "context": [
+      1540,
+      1550
+    ],
+    "target": [
+      1545
+    ]
+  },
+  "rgbd_bonn_static_0155": {
+    "context": [
+      1550,
+      1560
+    ],
+    "target": [
+      1555
+    ]
+  },
+  "rgbd_bonn_static_0156": {
+    "context": [
+      1560,
+      1570
+    ],
+    "target": [
+      1565
+    ]
+  },
+  "rgbd_bonn_static_0157": {
+    "context": [
+      1570,
+      1580
+    ],
+    "target": [
+      1575
+    ]
+  },
+  "rgbd_bonn_static_0158": {
+    "context": [
+      1580,
+      1590
+    ],
+    "target": [
+      1585
+    ]
+  },
+  "rgbd_bonn_static_0159": {
+    "context": [
+      1590,
+      1600
+    ],
+    "target": [
+      1595
+    ]
+  },
+  "rgbd_bonn_static_0160": {
+    "context": [
+      1600,
+      1610
+    ],
+    "target": [
+      1605
+    ]
+  },
+  "rgbd_bonn_static_0161": {
+    "context": [
+      1610,
+      1620
+    ],
+    "target": [
+      1615
+    ]
+  },
+  "rgbd_bonn_static_0162": {
+    "context": [
+      1620,
+      1630
+    ],
+    "target": [
+      1625
+    ]
+  },
+  "rgbd_bonn_static_0163": {
+    "context": [
+      1630,
+      1640
+    ],
+    "target": [
+      1635
+    ]
+  },
+  "rgbd_bonn_static_0164": {
+    "context": [
+      1640,
+      1650
+    ],
+    "target": [
+      1645
+    ]
+  },
+  "rgbd_bonn_static_0165": {
+    "context": [
+      1650,
+      1660
+    ],
+    "target": [
+      1655
+    ]
+  },
+  "rgbd_bonn_static_0166": {
+    "context": [
+      1660,
+      1670
+    ],
+    "target": [
+      1665
+    ]
+  },
+  "rgbd_bonn_static_0167": {
+    "context": [
+      1670,
+      1680
+    ],
+    "target": [
+      1675
+    ]
+  },
+  "rgbd_bonn_static_0168": {
+    "context": [
+      1680,
+      1690
+    ],
+    "target": [
+      1685
+    ]
+  },
+  "rgbd_bonn_static_0169": {
+    "context": [
+      1690,
+      1700
+    ],
+    "target": [
+      1695
+    ]
+  },
+  "rgbd_bonn_static_0170": {
+    "context": [
+      1700,
+      1710
+    ],
+    "target": [
+      1705
+    ]
+  },
+  "rgbd_bonn_static_0171": {
+    "context": [
+      1710,
+      1720
+    ],
+    "target": [
+      1715
+    ]
+  },
+  "rgbd_bonn_static_0172": {
+    "context": [
+      1720,
+      1730
+    ],
+    "target": [
+      1725
+    ]
+  },
+  "rgbd_bonn_static_0173": {
+    "context": [
+      1730,
+      1740
+    ],
+    "target": [
+      1735
+    ]
+  },
+  "rgbd_bonn_static_0174": {
+    "context": [
+      1740,
+      1750
+    ],
+    "target": [
+      1745
+    ]
+  },
+  "rgbd_bonn_static_0175": {
+    "context": [
+      1750,
+      1760
+    ],
+    "target": [
+      1755
+    ]
+  },
+  "rgbd_bonn_static_0176": {
+    "context": [
+      1760,
+      1770
+    ],
+    "target": [
+      1765
+    ]
+  },
+  "rgbd_bonn_static_0177": {
+    "context": [
+      1770,
+      1780
+    ],
+    "target": [
+      1775
+    ]
+  },
+  "rgbd_bonn_static_0178": {
+    "context": [
+      1780,
+      1790
+    ],
+    "target": [
+      1785
+    ]
+  },
+  "rgbd_bonn_static_0179": {
+    "context": [
+      1790,
+      1800
+    ],
+    "target": [
+      1795
+    ]
+  },
+  "rgbd_bonn_static_0180": {
+    "context": [
+      1800,
+      1810
+    ],
+    "target": [
+      1805
+    ]
+  },
+  "rgbd_bonn_static_0181": {
+    "context": [
+      1810,
+      1820
+    ],
+    "target": [
+      1815
+    ]
+  },
+  "rgbd_bonn_static_0182": {
+    "context": [
+      1820,
+      1830
+    ],
+    "target": [
+      1825
+    ]
+  },
+  "rgbd_bonn_static_0183": {
+    "context": [
+      1830,
+      1840
+    ],
+    "target": [
+      1835
+    ]
+  },
+  "rgbd_bonn_static_0184": {
+    "context": [
+      1840,
+      1850
+    ],
+    "target": [
+      1845
+    ]
+  },
+  "rgbd_bonn_static_0185": {
+    "context": [
+      1850,
+      1860
+    ],
+    "target": [
+      1855
+    ]
+  },
+  "rgbd_bonn_static_0186": {
+    "context": [
+      1860,
+      1870
+    ],
+    "target": [
+      1865
+    ]
+  },
+  "rgbd_bonn_static_0187": {
+    "context": [
+      1870,
+      1880
+    ],
+    "target": [
+      1875
+    ]
+  },
+  "rgbd_bonn_static_0188": {
+    "context": [
+      1880,
+      1890
+    ],
+    "target": [
+      1885
+    ]
+  },
+  "rgbd_bonn_static_0189": {
+    "context": [
+      1890,
+      1900
+    ],
+    "target": [
+      1895
+    ]
+  },
+  "rgbd_bonn_static_0190": {
+    "context": [
+      1900,
+      1910
+    ],
+    "target": [
+      1905
+    ]
+  },
+  "rgbd_bonn_static_0191": {
+    "context": [
+      1910,
+      1920
+    ],
+    "target": [
+      1915
+    ]
+  },
+  "rgbd_bonn_static_0192": {
+    "context": [
+      1920,
+      1930
+    ],
+    "target": [
+      1925
+    ]
+  },
+  "rgbd_bonn_static_0193": {
+    "context": [
+      1930,
+      1940
+    ],
+    "target": [
+      1935
+    ]
+  },
+  "rgbd_bonn_static_0194": {
+    "context": [
+      1940,
+      1950
+    ],
+    "target": [
+      1945
+    ]
+  },
+  "rgbd_bonn_static_0195": {
+    "context": [
+      1950,
+      1960
+    ],
+    "target": [
+      1955
+    ]
+  },
+  "rgbd_bonn_static_0196": {
+    "context": [
+      1960,
+      1970
+    ],
+    "target": [
+      1965
+    ]
+  },
+  "rgbd_bonn_static_0197": {
+    "context": [
+      1970,
+      1980
+    ],
+    "target": [
+      1975
+    ]
+  },
+  "rgbd_bonn_static_0198": {
+    "context": [
+      1980,
+      1990
+    ],
+    "target": [
+      1985
+    ]
+  },
+  "rgbd_bonn_static_0199": {
+    "context": [
+      1990,
+      2000
+    ],
+    "target": [
+      1995
+    ]
+  },
+  "rgbd_bonn_static_0200": {
+    "context": [
+      2000,
+      2010
+    ],
+    "target": [
+      2005
+    ]
+  },
+  "rgbd_bonn_static_0201": {
+    "context": [
+      2010,
+      2020
+    ],
+    "target": [
+      2015
+    ]
+  },
+  "rgbd_bonn_static_0202": {
+    "context": [
+      2020,
+      2030
+    ],
+    "target": [
+      2025
+    ]
+  },
+  "rgbd_bonn_static_0203": {
+    "context": [
+      2030,
+      2040
+    ],
+    "target": [
+      2035
+    ]
+  },
+  "rgbd_bonn_static_0204": {
+    "context": [
+      2040,
+      2050
+    ],
+    "target": [
+      2045
+    ]
+  },
+  "rgbd_bonn_static_0205": {
+    "context": [
+      2050,
+      2060
+    ],
+    "target": [
+      2055
+    ]
+  },
+  "rgbd_bonn_static_0206": {
+    "context": [
+      2060,
+      2070
+    ],
+    "target": [
+      2065
+    ]
+  },
+  "rgbd_bonn_static_0207": {
+    "context": [
+      2070,
+      2080
+    ],
+    "target": [
+      2075
+    ]
+  },
+  "rgbd_bonn_static_0208": {
+    "context": [
+      2080,
+      2090
+    ],
+    "target": [
+      2085
+    ]
+  },
+  "rgbd_bonn_static_0209": {
+    "context": [
+      2090,
+      2100
+    ],
+    "target": [
+      2095
+    ]
+  },
+  "rgbd_bonn_static_0210": {
+    "context": [
+      2100,
+      2110
+    ],
+    "target": [
+      2105
+    ]
+  },
+  "rgbd_bonn_static_0211": {
+    "context": [
+      2110,
+      2120
+    ],
+    "target": [
+      2115
+    ]
+  },
+  "rgbd_bonn_static_0212": {
+    "context": [
+      2120,
+      2130
+    ],
+    "target": [
+      2125
+    ]
+  },
+  "rgbd_bonn_static_0213": {
+    "context": [
+      2130,
+      2140
+    ],
+    "target": [
+      2135
+    ]
+  },
+  "rgbd_bonn_static_0214": {
+    "context": [
+      2140,
+      2150
+    ],
+    "target": [
+      2145
+    ]
+  },
+  "rgbd_bonn_static_0215": {
+    "context": [
+      2150,
+      2160
+    ],
+    "target": [
+      2155
+    ]
+  },
+  "rgbd_bonn_static_0216": {
+    "context": [
+      2160,
+      2170
+    ],
+    "target": [
+      2165
+    ]
+  },
+  "rgbd_bonn_static_0217": {
+    "context": [
+      2170,
+      2180
+    ],
+    "target": [
+      2175
+    ]
+  },
+  "rgbd_bonn_static_0218": {
+    "context": [
+      2180,
+      2190
+    ],
+    "target": [
+      2185
+    ]
+  },
+  "rgbd_bonn_static_0219": {
+    "context": [
+      2190,
+      2200
+    ],
+    "target": [
+      2195
+    ]
+  },
+  "rgbd_bonn_static_0220": {
+    "context": [
+      2200,
+      2210
+    ],
+    "target": [
+      2205
+    ]
+  },
+  "rgbd_bonn_static_0221": {
+    "context": [
+      2210,
+      2220
+    ],
+    "target": [
+      2215
+    ]
+  },
+  "rgbd_bonn_static_0222": {
+    "context": [
+      2220,
+      2230
+    ],
+    "target": [
+      2225
+    ]
+  },
+  "rgbd_bonn_static_0223": {
+    "context": [
+      2230,
+      2240
+    ],
+    "target": [
+      2235
+    ]
+  },
+  "rgbd_bonn_static_0224": {
+    "context": [
+      2240,
+      2250
+    ],
+    "target": [
+      2245
+    ]
+  },
+  "rgbd_bonn_static_0225": {
+    "context": [
+      2250,
+      2260
+    ],
+    "target": [
+      2255
+    ]
+  },
+  "rgbd_bonn_static_0226": {
+    "context": [
+      2260,
+      2270
+    ],
+    "target": [
+      2265
+    ]
+  },
+  "rgbd_bonn_static_0227": {
+    "context": [
+      2270,
+      2280
+    ],
+    "target": [
+      2275
+    ]
+  },
+  "rgbd_bonn_static_0228": {
+    "context": [
+      2280,
+      2290
+    ],
+    "target": [
+      2285
+    ]
+  },
+  "rgbd_bonn_static_0229": {
+    "context": [
+      2290,
+      2300
+    ],
+    "target": [
+      2295
+    ]
+  },
+  "rgbd_bonn_static_0230": {
+    "context": [
+      2300,
+      2310
+    ],
+    "target": [
+      2305
+    ]
+  },
+  "rgbd_bonn_static_0231": {
+    "context": [
+      2310,
+      2320
+    ],
+    "target": [
+      2315
+    ]
+  },
+  "rgbd_bonn_static_0232": {
+    "context": [
+      2320,
+      2330
+    ],
+    "target": [
+      2325
+    ]
+  },
+  "rgbd_bonn_static_0233": {
+    "context": [
+      2330,
+      2340
+    ],
+    "target": [
+      2335
+    ]
+  },
+  "rgbd_bonn_static_0234": {
+    "context": [
+      2340,
+      2350
+    ],
+    "target": [
+      2345
+    ]
+  },
+  "rgbd_bonn_static_0235": {
+    "context": [
+      2350,
+      2360
+    ],
+    "target": [
+      2355
+    ]
+  },
+  "rgbd_bonn_static_0236": {
+    "context": [
+      2360,
+      2370
+    ],
+    "target": [
+      2365
+    ]
+  },
+  "rgbd_bonn_static_0237": {
+    "context": [
+      2370,
+      2380
+    ],
+    "target": [
+      2375
+    ]
+  },
+  "rgbd_bonn_static_0238": {
+    "context": [
+      2380,
+      2390
+    ],
+    "target": [
+      2385
+    ]
+  },
+  "rgbd_bonn_static_0239": {
+    "context": [
+      2390,
+      2400
+    ],
+    "target": [
+      2395
+    ]
+  },
+  "rgbd_bonn_static_0240": {
+    "context": [
+      2400,
+      2410
+    ],
+    "target": [
+      2405
+    ]
+  },
+  "rgbd_bonn_static_0241": {
+    "context": [
+      2410,
+      2420
+    ],
+    "target": [
+      2415
+    ]
+  },
+  "rgbd_bonn_static_0242": {
+    "context": [
+      2420,
+      2430
+    ],
+    "target": [
+      2425
+    ]
+  },
+  "rgbd_bonn_static_0243": {
+    "context": [
+      2430,
+      2440
+    ],
+    "target": [
+      2435
+    ]
+  },
+  "rgbd_bonn_static_0244": {
+    "context": [
+      2440,
+      2450
+    ],
+    "target": [
+      2445
+    ]
+  },
+  "rgbd_bonn_static_0245": {
+    "context": [
+      2450,
+      2460
+    ],
+    "target": [
+      2455
+    ]
+  },
+  "rgbd_bonn_static_0246": {
+    "context": [
+      2460,
+      2470
+    ],
+    "target": [
+      2465
+    ]
+  },
+  "rgbd_bonn_static_0247": {
+    "context": [
+      2470,
+      2480
+    ],
+    "target": [
+      2475
+    ]
+  },
+  "rgbd_bonn_static_0248": {
+    "context": [
+      2480,
+      2490
+    ],
+    "target": [
+      2485
+    ]
+  },
+  "rgbd_bonn_static_0249": {
+    "context": [
+      2490,
+      2500
+    ],
+    "target": [
+      2495
+    ]
+  },
+  "rgbd_bonn_static_0250": {
+    "context": [
+      2500,
+      2510
+    ],
+    "target": [
+      2505
+    ]
+  },
+  "rgbd_bonn_static_0251": {
+    "context": [
+      2510,
+      2520
+    ],
+    "target": [
+      2515
+    ]
+  },
+  "rgbd_bonn_static_0252": {
+    "context": [
+      2520,
+      2530
+    ],
+    "target": [
+      2525
+    ]
+  },
+  "rgbd_bonn_static_0253": {
+    "context": [
+      2530,
+      2540
+    ],
+    "target": [
+      2535
+    ]
+  },
+  "rgbd_bonn_static_0254": {
+    "context": [
+      2540,
+      2550
+    ],
+    "target": [
+      2545
+    ]
+  },
+  "rgbd_bonn_static_0255": {
+    "context": [
+      2550,
+      2560
+    ],
+    "target": [
+      2555
+    ]
+  },
+  "rgbd_bonn_static_0256": {
+    "context": [
+      2560,
+      2570
+    ],
+    "target": [
+      2565
+    ]
+  },
+  "rgbd_bonn_static_0257": {
+    "context": [
+      2570,
+      2580
+    ],
+    "target": [
+      2575
+    ]
+  },
+  "rgbd_bonn_static_0258": {
+    "context": [
+      2580,
+      2590
+    ],
+    "target": [
+      2585
+    ]
+  },
+  "rgbd_bonn_static_0259": {
+    "context": [
+      2590,
+      2600
+    ],
+    "target": [
+      2595
+    ]
+  },
+  "rgbd_bonn_static_0260": {
+    "context": [
+      2600,
+      2610
+    ],
+    "target": [
+      2605
+    ]
+  },
+  "rgbd_bonn_static_0261": {
+    "context": [
+      2610,
+      2620
+    ],
+    "target": [
+      2615
+    ]
+  },
+  "rgbd_bonn_static_0262": {
+    "context": [
+      2620,
+      2630
+    ],
+    "target": [
+      2625
+    ]
+  },
+  "rgbd_bonn_static_0263": {
+    "context": [
+      2630,
+      2640
+    ],
+    "target": [
+      2635
+    ]
+  },
+  "rgbd_bonn_static_0264": {
+    "context": [
+      2640,
+      2650
+    ],
+    "target": [
+      2645
+    ]
+  },
+  "rgbd_bonn_static_0265": {
+    "context": [
+      2650,
+      2660
+    ],
+    "target": [
+      2655
+    ]
+  },
+  "rgbd_bonn_static_0266": {
+    "context": [
+      2660,
+      2670
+    ],
+    "target": [
+      2665
+    ]
+  },
+  "rgbd_bonn_static_0267": {
+    "context": [
+      2670,
+      2680
+    ],
+    "target": [
+      2675
+    ]
+  },
+  "rgbd_bonn_static_0268": {
+    "context": [
+      2680,
+      2690
+    ],
+    "target": [
+      2685
+    ]
+  },
+  "rgbd_bonn_static_0269": {
+    "context": [
+      2690,
+      2700
+    ],
+    "target": [
+      2695
+    ]
+  },
+  "rgbd_bonn_static_0270": {
+    "context": [
+      2700,
+      2710
+    ],
+    "target": [
+      2705
+    ]
+  },
+  "rgbd_bonn_static_0271": {
+    "context": [
+      2710,
+      2720
+    ],
+    "target": [
+      2715
+    ]
+  },
+  "rgbd_bonn_static_0272": {
+    "context": [
+      2720,
+      2730
+    ],
+    "target": [
+      2725
+    ]
+  },
+  "rgbd_bonn_static_0273": {
+    "context": [
+      2730,
+      2740
+    ],
+    "target": [
+      2735
+    ]
+  },
+  "rgbd_bonn_static_0274": {
+    "context": [
+      2740,
+      2750
+    ],
+    "target": [
+      2745
+    ]
+  },
+  "rgbd_bonn_static_0275": {
+    "context": [
+      2750,
+      2760
+    ],
+    "target": [
+      2755
+    ]
+  },
+  "rgbd_bonn_static_0276": {
+    "context": [
+      2760,
+      2770
+    ],
+    "target": [
+      2765
+    ]
+  },
+  "rgbd_bonn_static_0277": {
+    "context": [
+      2770,
+      2780
+    ],
+    "target": [
+      2775
+    ]
+  },
+  "rgbd_bonn_static_0278": {
+    "context": [
+      2780,
+      2790
+    ],
+    "target": [
+      2785
+    ]
+  },
+  "rgbd_bonn_static_0279": {
+    "context": [
+      2790,
+      2800
+    ],
+    "target": [
+      2795
+    ]
+  },
+  "rgbd_bonn_static_0280": {
+    "context": [
+      2800,
+      2810
+    ],
+    "target": [
+      2805
+    ]
+  },
+  "rgbd_bonn_static_0281": {
+    "context": [
+      2810,
+      2820
+    ],
+    "target": [
+      2815
+    ]
+  },
+  "rgbd_bonn_static_0282": {
+    "context": [
+      2820,
+      2830
+    ],
+    "target": [
+      2825
+    ]
+  },
+  "rgbd_bonn_static_0283": {
+    "context": [
+      2830,
+      2840
+    ],
+    "target": [
+      2835
+    ]
+  },
+  "rgbd_bonn_static_0284": {
+    "context": [
+      2840,
+      2850
+    ],
+    "target": [
+      2845
+    ]
+  },
+  "rgbd_bonn_static_0285": {
+    "context": [
+      2850,
+      2860
+    ],
+    "target": [
+      2855
+    ]
+  },
+  "rgbd_bonn_static_0286": {
+    "context": [
+      2860,
+      2870
+    ],
+    "target": [
+      2865
+    ]
+  },
+  "rgbd_bonn_static_0287": {
+    "context": [
+      2870,
+      2880
+    ],
+    "target": [
+      2875
+    ]
+  },
+  "rgbd_bonn_static_0288": {
+    "context": [
+      2880,
+      2890
+    ],
+    "target": [
+      2885
+    ]
+  },
+  "rgbd_bonn_static_0289": {
+    "context": [
+      2890,
+      2900
+    ],
+    "target": [
+      2895
+    ]
+  },
+  "rgbd_bonn_static_0290": {
+    "context": [
+      2900,
+      2910
+    ],
+    "target": [
+      2905
+    ]
+  },
+  "rgbd_bonn_static_0291": {
+    "context": [
+      2910,
+      2920
+    ],
+    "target": [
+      2915
+    ]
+  },
+  "rgbd_bonn_static_0292": {
+    "context": [
+      2920,
+      2930
+    ],
+    "target": [
+      2925
+    ]
+  },
+  "rgbd_bonn_static_0293": {
+    "context": [
+      2930,
+      2940
+    ],
+    "target": [
+      2935
+    ]
+  },
+  "rgbd_bonn_static_0294": {
+    "context": [
+      2940,
+      2950
+    ],
+    "target": [
+      2945
+    ]
+  },
+  "rgbd_bonn_static_0295": {
+    "context": [
+      2950,
+      2960
+    ],
+    "target": [
+      2955
+    ]
+  },
+  "rgbd_bonn_static_0296": {
+    "context": [
+      2960,
+      2970
+    ],
+    "target": [
+      2965
+    ]
+  },
+  "rgbd_bonn_static_0297": {
+    "context": [
+      2970,
+      2980
+    ],
+    "target": [
+      2975
+    ]
+  },
+  "rgbd_bonn_static_0298": {
+    "context": [
+      2980,
+      2990
+    ],
+    "target": [
+      2985
+    ]
+  },
+  "rgbd_bonn_static_0299": {
+    "context": [
+      2990,
+      3000
+    ],
+    "target": [
+      2995
+    ]
+  },
+  "rgbd_bonn_static_0300": {
+    "context": [
+      3000,
+      3010
+    ],
+    "target": [
+      3005
+    ]
+  },
+  "rgbd_bonn_static_0301": {
+    "context": [
+      3010,
+      3020
+    ],
+    "target": [
+      3015
+    ]
+  },
+  "rgbd_bonn_static_0302": {
+    "context": [
+      3020,
+      3030
+    ],
+    "target": [
+      3025
+    ]
+  },
+  "rgbd_bonn_static_0303": {
+    "context": [
+      3030,
+      3040
+    ],
+    "target": [
+      3035
+    ]
+  },
+  "rgbd_bonn_static_0304": {
+    "context": [
+      3040,
+      3050
+    ],
+    "target": [
+      3045
+    ]
+  },
+  "rgbd_bonn_static_0305": {
+    "context": [
+      3050,
+      3060
+    ],
+    "target": [
+      3055
+    ]
+  },
+  "rgbd_bonn_static_0306": {
+    "context": [
+      3060,
+      3070
+    ],
+    "target": [
+      3065
+    ]
+  },
+  "rgbd_bonn_static_0307": {
+    "context": [
+      3070,
+      3080
+    ],
+    "target": [
+      3075
+    ]
+  },
+  "rgbd_bonn_static_0308": {
+    "context": [
+      3080,
+      3090
+    ],
+    "target": [
+      3085
+    ]
+  },
+  "rgbd_bonn_static_0309": {
+    "context": [
+      3090,
+      3100
+    ],
+    "target": [
+      3095
+    ]
+  },
+  "rgbd_bonn_static_0310": {
+    "context": [
+      3100,
+      3110
+    ],
+    "target": [
+      3105
+    ]
+  },
+  "rgbd_bonn_static_0311": {
+    "context": [
+      3110,
+      3120
+    ],
+    "target": [
+      3115
+    ]
+  },
+  "rgbd_bonn_static_0312": {
+    "context": [
+      3120,
+      3130
+    ],
+    "target": [
+      3125
+    ]
+  },
+  "rgbd_bonn_static_0313": {
+    "context": [
+      3130,
+      3140
+    ],
+    "target": [
+      3135
+    ]
+  },
+  "rgbd_bonn_static_0314": {
+    "context": [
+      3140,
+      3150
+    ],
+    "target": [
+      3145
+    ]
+  },
+  "rgbd_bonn_static_0315": {
+    "context": [
+      3150,
+      3160
+    ],
+    "target": [
+      3155
+    ]
+  },
+  "rgbd_bonn_static_0316": {
+    "context": [
+      3160,
+      3170
+    ],
+    "target": [
+      3165
+    ]
+  },
+  "rgbd_bonn_static_0317": {
+    "context": [
+      3170,
+      3180
+    ],
+    "target": [
+      3175
+    ]
+  },
+  "rgbd_bonn_static_0318": {
+    "context": [
+      3180,
+      3190
+    ],
+    "target": [
+      3185
+    ]
+  },
+  "rgbd_bonn_static_0319": {
+    "context": [
+      3190,
+      3200
+    ],
+    "target": [
+      3195
+    ]
+  },
+  "rgbd_bonn_static_0320": {
+    "context": [
+      3200,
+      3210
+    ],
+    "target": [
+      3205
+    ]
+  },
+  "rgbd_bonn_static_0321": {
+    "context": [
+      3210,
+      3220
+    ],
+    "target": [
+      3215
+    ]
+  },
+  "rgbd_bonn_static_0322": {
+    "context": [
+      3220,
+      3230
+    ],
+    "target": [
+      3225
+    ]
+  },
+  "rgbd_bonn_static_0323": {
+    "context": [
+      3230,
+      3240
+    ],
+    "target": [
+      3235
+    ]
+  },
+  "rgbd_bonn_static_0324": {
+    "context": [
+      3240,
+      3250
+    ],
+    "target": [
+      3245
+    ]
+  },
+  "rgbd_bonn_static_0325": {
+    "context": [
+      3250,
+      3260
+    ],
+    "target": [
+      3255
+    ]
+  },
+  "rgbd_bonn_static_0326": {
+    "context": [
+      3260,
+      3270
+    ],
+    "target": [
+      3265
+    ]
+  },
+  "rgbd_bonn_static_0327": {
+    "context": [
+      3270,
+      3280
+    ],
+    "target": [
+      3275
+    ]
+  },
+  "rgbd_bonn_static_0328": {
+    "context": [
+      3280,
+      3290
+    ],
+    "target": [
+      3285
+    ]
+  },
+  "rgbd_bonn_static_0329": {
+    "context": [
+      3290,
+      3300
+    ],
+    "target": [
+      3295
+    ]
+  },
+  "rgbd_bonn_static_0330": {
+    "context": [
+      3300,
+      3310
+    ],
+    "target": [
+      3305
+    ]
+  },
+  "rgbd_bonn_static_0331": {
+    "context": [
+      3310,
+      3320
+    ],
+    "target": [
+      3315
+    ]
+  },
+  "rgbd_bonn_static_0332": {
+    "context": [
+      3320,
+      3330
+    ],
+    "target": [
+      3325
+    ]
+  },
+  "rgbd_bonn_static_0333": {
+    "context": [
+      3330,
+      3340
+    ],
+    "target": [
+      3335
+    ]
+  },
+  "rgbd_bonn_static_0334": {
+    "context": [
+      3340,
+      3350
+    ],
+    "target": [
+      3345
+    ]
+  },
+  "rgbd_bonn_static_0335": {
+    "context": [
+      3350,
+      3360
+    ],
+    "target": [
+      3355
+    ]
+  },
+  "rgbd_bonn_static_0336": {
+    "context": [
+      3360,
+      3370
+    ],
+    "target": [
+      3365
+    ]
+  },
+  "rgbd_bonn_static_0337": {
+    "context": [
+      3370,
+      3380
+    ],
+    "target": [
+      3375
+    ]
+  },
+  "rgbd_bonn_static_0338": {
+    "context": [
+      3380,
+      3390
+    ],
+    "target": [
+      3385
+    ]
+  },
+  "rgbd_bonn_static_0339": {
+    "context": [
+      3390,
+      3400
+    ],
+    "target": [
+      3395
+    ]
+  },
+  "rgbd_bonn_static_0340": {
+    "context": [
+      3400,
+      3410
+    ],
+    "target": [
+      3405
+    ]
+  },
+  "rgbd_bonn_static_0341": {
+    "context": [
+      3410,
+      3420
+    ],
+    "target": [
+      3415
+    ]
+  },
+  "rgbd_bonn_static_0342": {
+    "context": [
+      3420,
+      3430
+    ],
+    "target": [
+      3425
+    ]
+  },
+  "rgbd_bonn_static_0343": {
+    "context": [
+      3430,
+      3440
+    ],
+    "target": [
+      3435
+    ]
+  },
+  "rgbd_bonn_static_0344": {
+    "context": [
+      3440,
+      3450
+    ],
+    "target": [
+      3445
+    ]
+  },
+  "rgbd_bonn_static_0345": {
+    "context": [
+      3450,
+      3460
+    ],
+    "target": [
+      3455
+    ]
+  },
+  "rgbd_bonn_static_0346": {
+    "context": [
+      3460,
+      3470
+    ],
+    "target": [
+      3465
+    ]
+  },
+  "rgbd_bonn_static_0347": {
+    "context": [
+      3470,
+      3480
+    ],
+    "target": [
+      3475
+    ]
+  },
+  "rgbd_bonn_static_0348": {
+    "context": [
+      3480,
+      3490
+    ],
+    "target": [
+      3485
+    ]
+  },
+  "rgbd_bonn_static_0349": {
+    "context": [
+      3490,
+      3500
+    ],
+    "target": [
+      3495
+    ]
+  },
+  "rgbd_bonn_static_0350": {
+    "context": [
+      3500,
+      3510
+    ],
+    "target": [
+      3505
+    ]
+  },
+  "rgbd_bonn_static_0351": {
+    "context": [
+      3510,
+      3520
+    ],
+    "target": [
+      3515
+    ]
+  },
+  "rgbd_bonn_static_0352": {
+    "context": [
+      3520,
+      3530
+    ],
+    "target": [
+      3525
+    ]
+  },
+  "rgbd_bonn_static_0353": {
+    "context": [
+      3530,
+      3540
+    ],
+    "target": [
+      3535
+    ]
+  },
+  "rgbd_bonn_static_0354": {
+    "context": [
+      3540,
+      3550
+    ],
+    "target": [
+      3545
+    ]
+  },
+  "rgbd_bonn_static_0355": {
+    "context": [
+      3550,
+      3560
+    ],
+    "target": [
+      3555
+    ]
+  },
+  "rgbd_bonn_static_0356": {
+    "context": [
+      3560,
+      3570
+    ],
+    "target": [
+      3565
+    ]
+  },
+  "rgbd_bonn_static_0357": {
+    "context": [
+      3570,
+      3580
+    ],
+    "target": [
+      3575
+    ]
+  },
+  "rgbd_bonn_static_0358": {
+    "context": [
+      3580,
+      3590
+    ],
+    "target": [
+      3585
+    ]
+  },
+  "rgbd_bonn_static_0359": {
+    "context": [
+      3590,
+      3600
+    ],
+    "target": [
+      3595
+    ]
+  },
+  "rgbd_bonn_static_0360": {
+    "context": [
+      3600,
+      3610
+    ],
+    "target": [
+      3605
+    ]
+  },
+  "rgbd_bonn_static_0361": {
+    "context": [
+      3610,
+      3620
+    ],
+    "target": [
+      3615
+    ]
+  },
+  "rgbd_bonn_static_0362": {
+    "context": [
+      3620,
+      3630
+    ],
+    "target": [
+      3625
+    ]
+  },
+  "rgbd_bonn_static_0363": {
+    "context": [
+      3630,
+      3640
+    ],
+    "target": [
+      3635
+    ]
+  },
+  "rgbd_bonn_static_0364": {
+    "context": [
+      3640,
+      3650
+    ],
+    "target": [
+      3645
+    ]
+  },
+  "rgbd_bonn_static_0365": {
+    "context": [
+      3650,
+      3660
+    ],
+    "target": [
+      3655
+    ]
+  },
+  "rgbd_bonn_static_0366": {
+    "context": [
+      3660,
+      3670
+    ],
+    "target": [
+      3665
+    ]
+  },
+  "rgbd_bonn_static_0367": {
+    "context": [
+      3670,
+      3680
+    ],
+    "target": [
+      3675
+    ]
+  },
+  "rgbd_bonn_static_0368": {
+    "context": [
+      3680,
+      3690
+    ],
+    "target": [
+      3685
+    ]
+  },
+  "rgbd_bonn_static_0369": {
+    "context": [
+      3690,
+      3700
+    ],
+    "target": [
+      3695
+    ]
+  },
+  "rgbd_bonn_static_0370": {
+    "context": [
+      3700,
+      3710
+    ],
+    "target": [
+      3705
+    ]
+  },
+  "rgbd_bonn_static_0371": {
+    "context": [
+      3710,
+      3720
+    ],
+    "target": [
+      3715
+    ]
+  },
+  "rgbd_bonn_static_0372": {
+    "context": [
+      3720,
+      3730
+    ],
+    "target": [
+      3725
+    ]
+  },
+  "rgbd_bonn_static_0373": {
+    "context": [
+      3730,
+      3740
+    ],
+    "target": [
+      3735
+    ]
+  },
+  "rgbd_bonn_static_0374": {
+    "context": [
+      3740,
+      3750
+    ],
+    "target": [
+      3745
+    ]
+  },
+  "rgbd_bonn_static_0375": {
+    "context": [
+      3750,
+      3760
+    ],
+    "target": [
+      3755
+    ]
+  },
+  "rgbd_bonn_static_0376": {
+    "context": [
+      3760,
+      3770
+    ],
+    "target": [
+      3765
+    ]
+  },
+  "rgbd_bonn_static_0377": {
+    "context": [
+      3770,
+      3780
+    ],
+    "target": [
+      3775
+    ]
+  },
+  "rgbd_bonn_static_0378": {
+    "context": [
+      3780,
+      3790
+    ],
+    "target": [
+      3785
+    ]
+  },
+  "rgbd_bonn_static_0379": {
+    "context": [
+      3790,
+      3800
+    ],
+    "target": [
+      3795
+    ]
+  },
+  "rgbd_bonn_static_0380": {
+    "context": [
+      3800,
+      3810
+    ],
+    "target": [
+      3805
+    ]
+  },
+  "rgbd_bonn_static_0381": {
+    "context": [
+      3810,
+      3820
+    ],
+    "target": [
+      3815
+    ]
+  },
+  "rgbd_bonn_static_0382": {
+    "context": [
+      3820,
+      3830
+    ],
+    "target": [
+      3825
+    ]
+  },
+  "rgbd_bonn_static_0383": {
+    "context": [
+      3830,
+      3840
+    ],
+    "target": [
+      3835
+    ]
+  },
+  "rgbd_bonn_static_0384": {
+    "context": [
+      3840,
+      3850
+    ],
+    "target": [
+      3845
+    ]
+  },
+  "rgbd_bonn_static_0385": {
+    "context": [
+      3850,
+      3860
+    ],
+    "target": [
+      3855
+    ]
+  },
+  "rgbd_bonn_static_0386": {
+    "context": [
+      3860,
+      3870
+    ],
+    "target": [
+      3865
+    ]
+  },
+  "rgbd_bonn_static_0387": {
+    "context": [
+      3870,
+      3880
+    ],
+    "target": [
+      3875
+    ]
+  },
+  "rgbd_bonn_static_0388": {
+    "context": [
+      3880,
+      3890
+    ],
+    "target": [
+      3885
+    ]
+  },
+  "rgbd_bonn_static_0389": {
+    "context": [
+      3890,
+      3900
+    ],
+    "target": [
+      3895
+    ]
+  },
+  "rgbd_bonn_static_0390": {
+    "context": [
+      3900,
+      3910
+    ],
+    "target": [
+      3905
+    ]
+  },
+  "rgbd_bonn_static_0391": {
+    "context": [
+      3910,
+      3920
+    ],
+    "target": [
+      3915
+    ]
+  },
+  "rgbd_bonn_static_0392": {
+    "context": [
+      3920,
+      3930
+    ],
+    "target": [
+      3925
+    ]
+  },
+  "rgbd_bonn_static_0393": {
+    "context": [
+      3930,
+      3940
+    ],
+    "target": [
+      3935
+    ]
+  },
+  "rgbd_bonn_static_0394": {
+    "context": [
+      3940,
+      3950
+    ],
+    "target": [
+      3945
+    ]
+  },
+  "rgbd_bonn_static_0395": {
+    "context": [
+      3950,
+      3960
+    ],
+    "target": [
+      3955
+    ]
+  },
+  "rgbd_bonn_static_0396": {
+    "context": [
+      3960,
+      3970
+    ],
+    "target": [
+      3965
+    ]
+  },
+  "rgbd_bonn_static_0397": {
+    "context": [
+      3970,
+      3980
+    ],
+    "target": [
+      3975
+    ]
+  },
+  "rgbd_bonn_static_0398": {
+    "context": [
+      3980,
+      3990
+    ],
+    "target": [
+      3985
+    ]
+  },
+  "rgbd_bonn_static_0399": {
+    "context": [
+      3990,
+      4000
+    ],
+    "target": [
+      3995
+    ]
+  },
+  "rgbd_bonn_static_0400": {
+    "context": [
+      4000,
+      4010
+    ],
+    "target": [
+      4005
+    ]
+  },
+  "rgbd_bonn_static_0401": {
+    "context": [
+      4010,
+      4020
+    ],
+    "target": [
+      4015
+    ]
+  },
+  "rgbd_bonn_static_0402": {
+    "context": [
+      4020,
+      4030
+    ],
+    "target": [
+      4025
+    ]
+  },
+  "rgbd_bonn_static_0403": {
+    "context": [
+      4030,
+      4040
+    ],
+    "target": [
+      4035
+    ]
+  },
+  "rgbd_bonn_static_0404": {
+    "context": [
+      4040,
+      4050
+    ],
+    "target": [
+      4045
+    ]
+  },
+  "rgbd_bonn_static_0405": {
+    "context": [
+      4050,
+      4060
+    ],
+    "target": [
+      4055
+    ]
+  },
+  "rgbd_bonn_static_0406": {
+    "context": [
+      4060,
+      4070
+    ],
+    "target": [
+      4065
+    ]
+  },
+  "rgbd_bonn_static_0407": {
+    "context": [
+      4070,
+      4080
+    ],
+    "target": [
+      4075
+    ]
+  },
+  "rgbd_bonn_static_0408": {
+    "context": [
+      4080,
+      4090
+    ],
+    "target": [
+      4085
+    ]
+  },
+  "rgbd_bonn_static_0409": {
+    "context": [
+      4090,
+      4100
+    ],
+    "target": [
+      4095
+    ]
+  },
+  "rgbd_bonn_static_0410": {
+    "context": [
+      4100,
+      4110
+    ],
+    "target": [
+      4105
+    ]
+  },
+  "rgbd_bonn_static_0411": {
+    "context": [
+      4110,
+      4120
+    ],
+    "target": [
+      4115
+    ]
+  },
+  "rgbd_bonn_static_0412": {
+    "context": [
+      4120,
+      4130
+    ],
+    "target": [
+      4125
+    ]
+  },
+  "rgbd_bonn_static_0413": {
+    "context": [
+      4130,
+      4140
+    ],
+    "target": [
+      4135
+    ]
+  },
+  "rgbd_bonn_static_0414": {
+    "context": [
+      4140,
+      4150
+    ],
+    "target": [
+      4145
+    ]
+  },
+  "rgbd_bonn_static_0415": {
+    "context": [
+      4150,
+      4160
+    ],
+    "target": [
+      4155
+    ]
+  },
+  "rgbd_bonn_static_0416": {
+    "context": [
+      4160,
+      4170
+    ],
+    "target": [
+      4165
+    ]
+  },
+  "rgbd_bonn_static_0417": {
+    "context": [
+      4170,
+      4180
+    ],
+    "target": [
+      4175
+    ]
+  },
+  "rgbd_bonn_static_0418": {
+    "context": [
+      4180,
+      4190
+    ],
+    "target": [
+      4185
+    ]
+  },
+  "rgbd_bonn_static_0419": {
+    "context": [
+      4190,
+      4200
+    ],
+    "target": [
+      4195
+    ]
+  },
+  "rgbd_bonn_static_0420": {
+    "context": [
+      4200,
+      4210
+    ],
+    "target": [
+      4205
+    ]
+  },
+  "rgbd_bonn_static_0421": {
+    "context": [
+      4210,
+      4220
+    ],
+    "target": [
+      4215
+    ]
+  },
+  "rgbd_bonn_static_0422": {
+    "context": [
+      4220,
+      4230
+    ],
+    "target": [
+      4225
+    ]
+  },
+  "rgbd_bonn_static_0423": {
+    "context": [
+      4230,
+      4240
+    ],
+    "target": [
+      4235
+    ]
+  },
+  "rgbd_bonn_static_0424": {
+    "context": [
+      4240,
+      4250
+    ],
+    "target": [
+      4245
+    ]
+  },
+  "rgbd_bonn_static_0425": {
+    "context": [
+      4250,
+      4260
+    ],
+    "target": [
+      4255
+    ]
+  },
+  "rgbd_bonn_static_0426": {
+    "context": [
+      4260,
+      4270
+    ],
+    "target": [
+      4265
+    ]
+  },
+  "rgbd_bonn_static_0427": {
+    "context": [
+      4270,
+      4280
+    ],
+    "target": [
+      4275
+    ]
+  },
+  "rgbd_bonn_static_0428": {
+    "context": [
+      4280,
+      4290
+    ],
+    "target": [
+      4285
+    ]
+  },
+  "rgbd_bonn_static_0429": {
+    "context": [
+      4290,
+      4300
+    ],
+    "target": [
+      4295
+    ]
+  },
+  "rgbd_bonn_static_0430": {
+    "context": [
+      4300,
+      4310
+    ],
+    "target": [
+      4305
+    ]
+  },
+  "rgbd_bonn_static_0431": {
+    "context": [
+      4310,
+      4320
+    ],
+    "target": [
+      4315
+    ]
+  },
+  "rgbd_bonn_static_0432": {
+    "context": [
+      4320,
+      4330
+    ],
+    "target": [
+      4325
+    ]
+  },
+  "rgbd_bonn_static_0433": {
+    "context": [
+      4330,
+      4340
+    ],
+    "target": [
+      4335
+    ]
+  },
+  "rgbd_bonn_static_0434": {
+    "context": [
+      4340,
+      4350
+    ],
+    "target": [
+      4345
+    ]
+  },
+  "rgbd_bonn_static_0435": {
+    "context": [
+      4350,
+      4360
+    ],
+    "target": [
+      4355
+    ]
+  },
+  "rgbd_bonn_static_0436": {
+    "context": [
+      4360,
+      4370
+    ],
+    "target": [
+      4365
+    ]
+  },
+  "rgbd_bonn_static_0437": {
+    "context": [
+      4370,
+      4380
+    ],
+    "target": [
+      4375
+    ]
+  },
+  "rgbd_bonn_static_0438": {
+    "context": [
+      4380,
+      4390
+    ],
+    "target": [
+      4385
+    ]
+  },
+  "rgbd_bonn_static_0439": {
+    "context": [
+      4390,
+      4400
+    ],
+    "target": [
+      4395
+    ]
+  },
+  "rgbd_bonn_static_0440": {
+    "context": [
+      4400,
+      4410
+    ],
+    "target": [
+      4405
+    ]
+  },
+  "rgbd_bonn_static_0441": {
+    "context": [
+      4410,
+      4420
+    ],
+    "target": [
+      4415
+    ]
+  },
+  "rgbd_bonn_static_0442": {
+    "context": [
+      4420,
+      4430
+    ],
+    "target": [
+      4425
+    ]
+  },
+  "rgbd_bonn_static_0443": {
+    "context": [
+      4430,
+      4440
+    ],
+    "target": [
+      4435
+    ]
+  },
+  "rgbd_bonn_static_0444": {
+    "context": [
+      4440,
+      4450
+    ],
+    "target": [
+      4445
+    ]
+  },
+  "rgbd_bonn_static_0445": {
+    "context": [
+      4450,
+      4460
+    ],
+    "target": [
+      4455
+    ]
+  },
+  "rgbd_bonn_static_0446": {
+    "context": [
+      4460,
+      4470
+    ],
+    "target": [
+      4465
+    ]
+  },
+  "rgbd_bonn_static_0447": {
+    "context": [
+      4470,
+      4480
+    ],
+    "target": [
+      4475
+    ]
+  },
+  "rgbd_bonn_static_0448": {
+    "context": [
+      4480,
+      4490
+    ],
+    "target": [
+      4485
+    ]
+  },
+  "rgbd_bonn_static_0449": {
+    "context": [
+      4490,
+      4500
+    ],
+    "target": [
+      4495
+    ]
+  },
+  "rgbd_bonn_static_0450": {
+    "context": [
+      4500,
+      4510
+    ],
+    "target": [
+      4505
+    ]
+  },
+  "rgbd_bonn_static_0451": {
+    "context": [
+      4510,
+      4520
+    ],
+    "target": [
+      4515
+    ]
+  },
+  "rgbd_bonn_static_0452": {
+    "context": [
+      4520,
+      4530
+    ],
+    "target": [
+      4525
+    ]
+  },
+  "rgbd_bonn_static_0453": {
+    "context": [
+      4530,
+      4540
+    ],
+    "target": [
+      4535
+    ]
+  },
+  "rgbd_bonn_static_0454": {
+    "context": [
+      4540,
+      4550
+    ],
+    "target": [
+      4545
+    ]
+  },
+  "rgbd_bonn_static_0455": {
+    "context": [
+      4550,
+      4560
+    ],
+    "target": [
+      4555
+    ]
+  },
+  "rgbd_bonn_static_0456": {
+    "context": [
+      4560,
+      4570
+    ],
+    "target": [
+      4565
+    ]
+  },
+  "rgbd_bonn_static_0457": {
+    "context": [
+      4570,
+      4580
+    ],
+    "target": [
+      4575
+    ]
+  },
+  "rgbd_bonn_static_0458": {
+    "context": [
+      4580,
+      4590
+    ],
+    "target": [
+      4585
+    ]
+  },
+  "rgbd_bonn_static_0459": {
+    "context": [
+      4590,
+      4600
+    ],
+    "target": [
+      4595
+    ]
+  },
+  "rgbd_bonn_static_0460": {
+    "context": [
+      4600,
+      4610
+    ],
+    "target": [
+      4605
+    ]
+  },
+  "rgbd_bonn_static_0461": {
+    "context": [
+      4610,
+      4620
+    ],
+    "target": [
+      4615
+    ]
+  },
+  "rgbd_bonn_static_0462": {
+    "context": [
+      4620,
+      4630
+    ],
+    "target": [
+      4625
+    ]
+  },
+  "rgbd_bonn_static_0463": {
+    "context": [
+      4630,
+      4640
+    ],
+    "target": [
+      4635
+    ]
+  },
+  "rgbd_bonn_static_0464": {
+    "context": [
+      4640,
+      4650
+    ],
+    "target": [
+      4645
+    ]
+  },
+  "rgbd_bonn_static_0465": {
+    "context": [
+      4650,
+      4660
+    ],
+    "target": [
+      4655
+    ]
+  },
+  "rgbd_bonn_static_0466": {
+    "context": [
+      4660,
+      4670
+    ],
+    "target": [
+      4665
+    ]
+  },
+  "rgbd_bonn_static_0467": {
+    "context": [
+      4670,
+      4680
+    ],
+    "target": [
+      4675
+    ]
+  },
+  "rgbd_bonn_static_0468": {
+    "context": [
+      4680,
+      4690
+    ],
+    "target": [
+      4685
+    ]
+  },
+  "rgbd_bonn_static_0469": {
+    "context": [
+      4690,
+      4700
+    ],
+    "target": [
+      4695
+    ]
+  },
+  "rgbd_bonn_static_0470": {
+    "context": [
+      4700,
+      4710
+    ],
+    "target": [
+      4705
+    ]
+  },
+  "rgbd_bonn_static_0471": {
+    "context": [
+      4710,
+      4720
+    ],
+    "target": [
+      4715
+    ]
+  },
+  "rgbd_bonn_static_0472": {
+    "context": [
+      4720,
+      4730
+    ],
+    "target": [
+      4725
+    ]
+  },
+  "rgbd_bonn_static_0473": {
+    "context": [
+      4730,
+      4740
+    ],
+    "target": [
+      4735
+    ]
+  },
+  "rgbd_bonn_static_0474": {
+    "context": [
+      4740,
+      4750
+    ],
+    "target": [
+      4745
+    ]
+  },
+  "rgbd_bonn_static_0475": {
+    "context": [
+      4750,
+      4760
+    ],
+    "target": [
+      4755
+    ]
+  },
+  "rgbd_bonn_static_0476": {
+    "context": [
+      4760,
+      4770
+    ],
+    "target": [
+      4765
+    ]
+  },
+  "rgbd_bonn_static_0477": {
+    "context": [
+      4770,
+      4780
+    ],
+    "target": [
+      4775
+    ]
+  },
+  "rgbd_bonn_static_0478": {
+    "context": [
+      4780,
+      4790
+    ],
+    "target": [
+      4785
+    ]
+  },
+  "rgbd_bonn_static_0479": {
+    "context": [
+      4790,
+      4800
+    ],
+    "target": [
+      4795
+    ]
+  },
+  "rgbd_bonn_static_0480": {
+    "context": [
+      4800,
+      4810
+    ],
+    "target": [
+      4805
+    ]
+  },
+  "rgbd_bonn_static_0481": {
+    "context": [
+      4810,
+      4820
+    ],
+    "target": [
+      4815
+    ]
+  },
+  "rgbd_bonn_static_0482": {
+    "context": [
+      4820,
+      4830
+    ],
+    "target": [
+      4825
+    ]
+  },
+  "rgbd_bonn_static_0483": {
+    "context": [
+      4830,
+      4840
+    ],
+    "target": [
+      4835
+    ]
+  },
+  "rgbd_bonn_static_0484": {
+    "context": [
+      4840,
+      4850
+    ],
+    "target": [
+      4845
+    ]
+  },
+  "rgbd_bonn_static_0485": {
+    "context": [
+      4850,
+      4860
+    ],
+    "target": [
+      4855
+    ]
+  },
+  "rgbd_bonn_static_0486": {
+    "context": [
+      4860,
+      4870
+    ],
+    "target": [
+      4865
+    ]
+  },
+  "rgbd_bonn_static_0487": {
+    "context": [
+      4870,
+      4880
+    ],
+    "target": [
+      4875
+    ]
+  },
+  "rgbd_bonn_static_0488": {
+    "context": [
+      4880,
+      4890
+    ],
+    "target": [
+      4885
+    ]
+  },
+  "rgbd_bonn_static_0489": {
+    "context": [
+      4890,
+      4900
+    ],
+    "target": [
+      4895
+    ]
+  },
+  "rgbd_bonn_static_0490": {
+    "context": [
+      4900,
+      4910
+    ],
+    "target": [
+      4905
+    ]
+  },
+  "rgbd_bonn_static_0491": {
+    "context": [
+      4910,
+      4920
+    ],
+    "target": [
+      4915
+    ]
+  },
+  "rgbd_bonn_static_0492": {
+    "context": [
+      4920,
+      4930
+    ],
+    "target": [
+      4925
+    ]
+  },
+  "rgbd_bonn_static_0493": {
+    "context": [
+      4930,
+      4940
+    ],
+    "target": [
+      4935
+    ]
+  },
+  "rgbd_bonn_static_0494": {
+    "context": [
+      4940,
+      4950
+    ],
+    "target": [
+      4945
+    ]
+  },
+  "rgbd_bonn_static_0495": {
+    "context": [
+      4950,
+      4960
+    ],
+    "target": [
+      4955
+    ]
+  },
+  "rgbd_bonn_static_0496": {
+    "context": [
+      4960,
+      4970
+    ],
+    "target": [
+      4965
+    ]
+  },
+  "rgbd_bonn_static_0497": {
+    "context": [
+      4970,
+      4980
+    ],
+    "target": [
+      4975
+    ]
+  },
+  "rgbd_bonn_static_0498": {
+    "context": [
+      4980,
+      4990
+    ],
+    "target": [
+      4985
+    ]
+  },
+  "rgbd_bonn_static_0499": {
+    "context": [
+      4990,
+      5000
+    ],
+    "target": [
+      4995
+    ]
+  }
+}

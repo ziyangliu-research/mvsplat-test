@@ -177,7 +177,14 @@ class ModelWrapper(LightningModule):
         return total_loss
 
     def test_step(self, batch, batch_idx):
+        # print(">>> test_step called", batch_idx)
         batch: BatchedExample = self.data_shim(batch)
+
+        # print(batch["context"]["extrinsics"].shape)
+        # print(batch["target"]["extrinsics"].shape)
+        # print(batch["context"]["intrinsics"][0])
+        # print(batch["context"]["image"].shape)
+
         b, v, _, h, w = batch["target"]["image"].shape
         assert b == 1
 
@@ -188,6 +195,11 @@ class ModelWrapper(LightningModule):
                 self.global_step,
                 deterministic=False,
             )
+            (scene_name,) = batch["scene"]
+            name = get_cfg()["wandb"]["name"]
+            packet_dir = self.test_cfg.output_path / name / "gaussian_packets"
+            self._save_gaussians_packet(gaussians, batch, packet_dir)
+            
         with self.benchmarker.time("decoder", num_calls=v):
             output = self.decoder.forward(
                 gaussians,
@@ -563,3 +575,44 @@ class ModelWrapper(LightningModule):
                 "frequency": 1,
             },
         }
+    
+    def _save_gaussians_packet(self, gaussians, batch, path_root):
+        """
+        保存每个 evaluation sample 的高斯包。
+        只保存 runtime 可信的 world-space 表示：
+        - means
+        - covariances
+        - harmonics
+        - opacities
+        以及元信息：
+        - scene
+        - context indices
+        - target indices
+        - context extrinsics / intrinsics
+        - target extrinsics / intrinsics
+        """
+        path_root.mkdir(exist_ok=True, parents=True)
+
+        scene = batch["scene"][0] if isinstance(batch["scene"], list) else batch["scene"]
+        save_path = path_root / f"{scene}.pt"
+
+        packet = {
+            "scene": scene,
+            "context_index": batch["context"]["index"][0].detach().cpu(),
+            "target_index": batch["target"]["index"][0].detach().cpu(),
+            "context_extrinsics": batch["context"]["extrinsics"][0].detach().cpu(),
+            "context_intrinsics": batch["context"]["intrinsics"][0].detach().cpu(),
+            "target_extrinsics": batch["target"]["extrinsics"][0].detach().cpu(),
+            "target_intrinsics": batch["target"]["intrinsics"][0].detach().cpu(),
+            "means": gaussians.means[0].detach().cpu(),
+            "covariances": gaussians.covariances[0].detach().cpu(),
+            "harmonics": gaussians.harmonics[0].detach().cpu(),
+            "opacities": gaussians.opacities[0].detach().cpu(),
+            "target_near": batch["target"]["near"][0].detach().cpu(),
+            "target_far": batch["target"]["far"][0].detach().cpu(),
+            "target_image": batch["target"]["image"][0].detach().cpu(),
+            "image_shape": tuple(batch["target"]["image"].shape[-2:]),
+            "background_color": torch.tensor(self.decoder.background_color).detach().cpu(),
+        }
+        
+        torch.save(packet, save_path)

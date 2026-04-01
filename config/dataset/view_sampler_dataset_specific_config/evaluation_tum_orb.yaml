@@ -1,0 +1,6 @@
+# @package _global_
+
+dataset:
+  view_sampler:
+    index_path: assets/evaluation_index_tum_orb.json
+    num_context_views: 2

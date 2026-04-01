@@ -1,0 +1,20 @@
+{
+    "rgbd_bonn_static_0000": {
+        "context": [
+            25,
+            30
+        ],
+        "target": [
+            32
+        ]
+    },
+    "rgbd_bonn_static_0001": {
+        "context": [
+            35,
+            40
+        ],
+        "target": [
+            32
+        ]
+    }
+}

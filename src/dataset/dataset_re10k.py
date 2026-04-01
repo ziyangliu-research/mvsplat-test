@@ -87,6 +87,8 @@ class DatasetRE10k(IterableDataset):
         return [lst[x] for x in indices]
 
     def __iter__(self):
+        print(">>> DatasetRE10k.__iter__ called")
+
         # Chunks must be shuffled here (not inside __init__) for validation to show
         # random chunks.
         if self.stage in (("train", "val") if self.cfg.shuffle_val else ("train")):
@@ -102,7 +104,7 @@ class DatasetRE10k(IterableDataset):
             ]
 
         for chunk_path in self.chunks:
-            # print(chunk_path)
+            print(chunk_path)
             # Load the chunk.
             chunk = torch.load(chunk_path)
 
@@ -131,6 +133,8 @@ class DatasetRE10k(IterableDataset):
                         extrinsics,
                         intrinsics,
                     )
+                    # print("context idx =", context_indices)
+                    # print("target idx  =", target_indices)
                     # reverse the context
                     # context_indices = torch.flip(context_indices, dims=[0])
                     # print(context_indices)
@@ -210,7 +214,7 @@ class DatasetRE10k(IterableDataset):
         Float[Tensor, "batch 3 3"],  # intrinsics
     ]:
         b, _ = poses.shape
-
+        
         # Convert the intrinsics to a 3x3 normalized K matrix.
         intrinsics = torch.eye(3, dtype=torch.float32)
         intrinsics = repeat(intrinsics, "h w -> b h w", b=b).clone()
@@ -223,6 +227,9 @@ class DatasetRE10k(IterableDataset):
         # Convert the extrinsics to a 4x4 OpenCV-style W2C matrix.
         w2c = repeat(torch.eye(4, dtype=torch.float32), "h w -> b h w", b=b).clone()
         w2c[:, :3] = rearrange(poses[:, 6:], "b (h w) -> b h w", h=3, w=4)
+
+        # print(">>> convert_poses called", poses.shape)
+        
         return w2c.inverse(), intrinsics
 
     def convert_images(
