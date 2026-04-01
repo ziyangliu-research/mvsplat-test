@@ -179,3 +179,5 @@ table.tex
 /test/*
 point_clouds*
 assets/*_3views.json
+
+/diff-gaussian-rasterization-modified
