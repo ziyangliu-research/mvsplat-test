@@ -6,7 +6,6 @@ import bisect
 import torch
 import torchvision.transforms as tf
 from PIL import Image
-from torch import Tensor
 from torch.utils.data import Dataset
 
 from .dataset import DatasetCfgCommon
@@ -22,7 +21,6 @@ class DatasetTUMORBCfg(DatasetCfgCommon):
     root: Path
     trajectory_file: Path
     association_file: Optional[Path] = None
-
     image_dirname: str = "image"
     depth_dirname: str = "depth"
 
@@ -35,12 +33,20 @@ class DatasetTUMORBCfg(DatasetCfgCommon):
     cx: float = 315.593520
     cy: float = 237.756098
 
-    # 最终是否输出 normalized K
+    # 输出 normalized K
     normalize_intrinsics: bool = True
 
-    # ---------- 测试长度 / 采样 ----------
-    test_len: int = 50
+    # ---------- 采样 ----------
     frame_stride: int = 1
+
+    # ---------- train/val/test 切分 ----------
+    train_split_ratio: float = 0.7
+    val_split_ratio: float = 0.15
+    # test 比例默认用剩余部分，不单独配也行；这里留着更清晰
+    test_split_ratio: float = 0.15
+
+    # ---------- debug / evaluation ----------
+    test_len: int = -1
 
     # ---------- 视锥范围 ----------
     near: float = 0.1
@@ -71,46 +77,110 @@ class DatasetTUMORB(Dataset):
         pose_times, pose_mats = self._load_trajectory(cfg.trajectory_file)
 
         # 3) 时间戳对齐：每张图像匹配最近的 pose
-        self.samples = []
+        all_samples = []
         for ts, img_path, depth_path in rgb_entries:
             Twc = self._match_pose(ts, pose_times, pose_mats, cfg.pose_time_tolerance)
             if Twc is None:
                 continue
-
-            self.samples.append(
+            all_samples.append(
                 {
                     "timestamp": ts,
                     "image_path": img_path,
                     "depth_path": depth_path,
-                    "extrinsics": Twc,   # 直接保存 4x4 Twc
+                    "extrinsics": Twc,  # 4x4 Twc
                 }
             )
 
         if cfg.frame_stride > 1:
-            self.samples = self.samples[:: cfg.frame_stride]
+            all_samples = all_samples[:: cfg.frame_stride]
 
-        
-        # evaluation 模式下：
-        # - 保留完整 self.samples（因为 JSON 里的 context/target 索引依赖完整帧池）
-        # - 只限制 dataset 的长度，不要裁剪 self.samples
+        if len(all_samples) == 0:
+            raise RuntimeError("No valid RGB-pose pairs found for TUM/ORB dataset.")
+
+        self.all_samples = all_samples
         self.eval_len = None
+
         sampler_name = getattr(self.view_sampler.cfg, "name", None)
 
+        # ------------------------------------------------------------------
+        # 训练/验证：按 contiguous split 切分序列
+        # 测试：
+        #   - 如果是 evaluation sampler，保留完整 self.all_samples，
+        #     因为你的 JSON 索引是基于完整序列定义的
+        #   - 否则走普通 split
+        # ------------------------------------------------------------------
         if stage == "test" and sampler_name == "evaluation":
+            self.samples = self.all_samples
             if cfg.test_len > 0:
                 self.eval_len = cfg.test_len
             else:
-                self.eval_len = len(self.view_sampler.index)
+                # evaluation sampler 通常有 index_path；如果没有，就退回全长
+                self.eval_len = getattr(self.view_sampler, "index", None)
+                if self.eval_len is not None:
+                    self.eval_len = len(self.view_sampler.index)
+                else:
+                    self.eval_len = len(self.samples)
         else:
-            if cfg.test_len > 0 and stage == "test":
+            self.samples = self._split_samples(self.all_samples, stage)
+
+            if stage == "test" and cfg.test_len > 0:
                 self.samples = self.samples[: cfg.test_len]
 
-                if cfg.test_len > 0 and stage == "test":
-                    self.samples = self.samples[: cfg.test_len]
-
         if len(self.samples) == 0:
-            raise RuntimeError("No valid RGB-pose pairs found for TUM dataset.")
+            raise RuntimeError(
+                f"No samples left after stage split. stage={stage}, root={cfg.root}"
+            )
 
+        print(
+            f">>> DatasetTUMORB init: stage={stage}, sampler={sampler_name}, "
+            f"all={len(self.all_samples)}, used={len(self.samples)}, scene={self.scene_name}"
+        )
+
+    # -------------------------------------------------------------------------
+    # split
+    # -------------------------------------------------------------------------
+    def _split_samples(self, samples, stage: Stage):
+        n = len(samples)
+
+        train_r = float(self.cfg.train_split_ratio)
+        val_r = float(self.cfg.val_split_ratio)
+        test_r = float(self.cfg.test_split_ratio)
+
+        if train_r < 0 or val_r < 0 or test_r < 0:
+            raise ValueError("Split ratios must be non-negative.")
+
+        total = train_r + val_r + test_r
+        if total <= 0:
+            raise ValueError("At least one split ratio must be positive.")
+
+        # 归一化，避免用户写成 70/15/15 或 0.7/0.15/0.15 都能工作
+        if total > 1.0 + 1e-6:
+            train_r /= total
+            val_r /= total
+            test_r /= total
+
+        train_end = int(round(n * train_r))
+        val_end = int(round(n * (train_r + val_r)))
+
+        # 边界保护
+        train_end = max(1, min(train_end, n))
+        val_end = max(train_end + 1, min(val_end, n)) if n >= 2 else n
+
+        if stage == "train":
+            subset = samples[:train_end]
+        elif stage == "val":
+            subset = samples[train_end:val_end]
+            if len(subset) == 0:
+                # 回退：至少给 1 个样本，避免 val loader 直接空
+                subset = samples[max(0, train_end - 1):train_end]
+        elif stage == "test":
+            subset = samples[val_end:]
+            if len(subset) == 0:
+                subset = samples[max(0, n - 1):]
+        else:
+            raise ValueError(f"Unknown stage: {stage}")
+
+        return subset
 
     # -------------------------------------------------------------------------
     # 数据读取
@@ -122,8 +192,7 @@ class DatasetTUMORB(Dataset):
         """
         entries = []
 
-        # 如果你以后想用 TUM 的 associations.txt，可以保留这个入口。
-        # 当前如果只是 RGB + pose -> MVSplat，association_file 不是必须的。
+        # 如果存在 associations.txt，优先使用
         if self.cfg.association_file is not None and self.cfg.association_file.exists():
             with self.cfg.association_file.open("r") as f:
                 for line in f:
@@ -132,7 +201,7 @@ class DatasetTUMORB(Dataset):
                         continue
                     parts = line.split()
 
-                    # TUM 常见 association:
+                    # 常见 TUM association:
                     # rgb_ts rgb_path depth_ts depth_path
                     if len(parts) >= 4:
                         rgb_ts = float(parts[0])
@@ -144,7 +213,7 @@ class DatasetTUMORB(Dataset):
                         img_path = self.cfg.root / parts[1]
                         entries.append((rgb_ts, img_path, None))
         else:
-            # 直接遍历 image/*.png，文件名即时间戳
+            # 直接遍历 image/*.png，文件名 stem 作为时间戳
             for p in sorted(self.image_root.glob("*.png")):
                 ts = float(p.stem)
                 depth_path = self.depth_root / f"{p.stem}.png"
@@ -159,9 +228,10 @@ class DatasetTUMORB(Dataset):
         """
         读取 TUM / ORB / GT 常见格式:
             timestamp tx ty tz qx qy qz qw
+
         返回:
             pose_times: list[float]
-            pose_mats: list[Tensor(4,4)]   # Twc
+            pose_mats: list[Tensor(4, 4)]  # Twc
         """
         pose_times = []
         pose_mats = []
@@ -171,13 +241,13 @@ class DatasetTUMORB(Dataset):
                 line = line.strip()
                 if not line or line.startswith("#"):
                     continue
+
                 parts = line.split()
                 if len(parts) < 8:
                     continue
 
                 ts, tx, ty, tz, qx, qy, qz, qw = map(float, parts[:8])
                 Twc = self._build_Twc_from_tum(tx, ty, tz, qx, qy, qz, qw)
-
                 pose_times.append(ts)
                 pose_mats.append(Twc)
 
@@ -187,11 +257,7 @@ class DatasetTUMORB(Dataset):
         return pose_times, pose_mats
 
     def _match_pose(self, ts, pose_times, pose_mats, tol):
-        """
-        最近邻匹配图像时间戳和轨迹时间戳
-        """
         idx = bisect.bisect_left(pose_times, ts)
-
         candidates = []
         if idx < len(pose_times):
             candidates.append(idx)
@@ -220,8 +286,7 @@ class DatasetTUMORB(Dataset):
         输出: Rwc
         """
         q = torch.tensor([qx, qy, qz, qw], dtype=torch.float32)
-        q = q / q.norm()  # 防止非单位四元数导致非法旋转矩阵
-
+        q = q / q.norm()
         x, y, z, w = q.tolist()
 
         xx, yy, zz = x * x, y * y, z * z
@@ -230,9 +295,9 @@ class DatasetTUMORB(Dataset):
 
         R = torch.tensor(
             [
-                [1 - 2 * (yy + zz), 2 * (xy - wz),     2 * (xz + wy)],
-                [2 * (xy + wz),     1 - 2 * (xx + zz), 2 * (yz - wx)],
-                [2 * (xz - wy),     2 * (yz + wx),     1 - 2 * (xx + yy)],
+                [1 - 2 * (yy + zz), 2 * (xy - wz), 2 * (xz + wy)],
+                [2 * (xy + wz), 1 - 2 * (xx + zz), 2 * (yz - wx)],
+                [2 * (xz - wy), 2 * (yz + wx), 1 - 2 * (xx + yy)],
             ],
             dtype=torch.float32,
         )
@@ -250,9 +315,6 @@ class DatasetTUMORB(Dataset):
         return Twc
 
     def _base_pixel_K(self):
-        """
-        原始像素 K（尚未做 resize/crop）
-        """
         K = torch.eye(3, dtype=torch.float32)
         K[0, 0] = self.cfg.fx
         K[1, 1] = self.cfg.fy
@@ -261,59 +323,43 @@ class DatasetTUMORB(Dataset):
         return K
 
     # -------------------------------------------------------------------------
-    # 图像几何处理（严谨版）
+    # 图像几何处理
     # -------------------------------------------------------------------------
     def _process_image_and_K(self, image_path: Path):
         """
-        严谨做法：
-            原图 -> (可选) undistort -> 保持比例 resize -> center crop
-            -> 同步更新像素 K -> 最终再 normalized K
-
-        返回:
-            image_tensor: [3,H,W]
-            K_final:      [3,3]   # 最终 normalized 或 pixel K
+        原图 -> 保持比例 resize -> center crop
+             -> 同步更新像素 K -> 可选 normalized K
         """
         with Image.open(image_path) as im:
             im = im.convert("RGB")
-
-            # -----------------------------------------------------------------
-            # 如果以后要处理 TUM 畸变，这里就是入口：
-            # 1) 用 ORB-SLAM3 / TUM 的 k1,k2,p1,p2,k3 先做 undistort
-            # 2) 同时把原始像素 K 更新成去畸变后的新 K
-            # 当前按你的要求：畸变先不处理，只保留这个注释位置。
-            # -----------------------------------------------------------------
 
             orig_w, orig_h = im.size
             K = self._base_pixel_K()
 
             target_h, target_w = self.cfg.image_shape
 
-            # 1) 保持比例 resize，使得短边至少覆盖 target
+            # 保持比例 resize，使短边覆盖目标大小
             scale = max(target_w / orig_w, target_h / orig_h)
             resized_w = int(round(orig_w * scale))
             resized_h = int(round(orig_h * scale))
 
             im = im.resize((resized_w, resized_h), Image.BILINEAR)
 
-            # 像素 K 随 resize 缩放
             K[0, 0] *= scale
             K[1, 1] *= scale
             K[0, 2] *= scale
             K[1, 2] *= scale
 
-            # 2) center crop 到最终尺寸
+            # center crop
             left = int(round((resized_w - target_w) / 2.0))
             top = int(round((resized_h - target_h) / 2.0))
             right = left + target_w
             bottom = top + target_h
-
             im = im.crop((left, top, right, bottom))
 
-            # principal point 随 crop 平移
             K[0, 2] -= left
             K[1, 2] -= top
 
-            # 3) 如果需要，最终转成 normalized K
             if self.cfg.normalize_intrinsics:
                 K[0, 0] /= target_w
                 K[1, 1] /= target_h
@@ -321,7 +367,8 @@ class DatasetTUMORB(Dataset):
                 K[1, 2] /= target_h
 
             image_tensor = self.to_tensor(im)
-            return image_tensor, K
+
+        return image_tensor, K
 
     # -------------------------------------------------------------------------
     # 辅助
@@ -330,35 +377,29 @@ class DatasetTUMORB(Dataset):
         return torch.full((n_views,), float(value), dtype=torch.float32)
 
     def __len__(self):
-        
         if self.eval_len is not None:
-                return self.eval_len
-
+            return self.eval_len
         return len(self.samples)
 
     # -------------------------------------------------------------------------
     # 主接口
     # -------------------------------------------------------------------------
-    
     def __getitem__(self, idx):
         """
         支持两种模式：
         1) bounded / arbitrary 等普通 sampler
         2) evaluation sampler：通过 JSON 精确控制 context / target
         """
+        sampler_name = getattr(self.view_sampler.cfg, "name", None)
 
-        # 先准备整段序列的 pose / K（给 sampler 用）
+        # 当前 self.samples:
+        # - train/val/bounded-test: 已是 stage split 后的子序列
+        # - test/evaluation: 保留完整序列
         all_extrinsics = torch.stack([x["extrinsics"] for x in self.samples], dim=0)
         dummy_intrinsics = torch.stack(
             [self._base_pixel_K() for _ in range(len(self.samples))], dim=0
         )
 
-        # ------------------------------------------------------------
-        # 关键点：
-        # evaluation sampler 是按 scene 字符串查 JSON 的。
-        # 所以如果想让每个 idx 对应一条 JSON 记录，就必须给每个样本不同的 scene key。
-        # ------------------------------------------------------------
-        sampler_name = getattr(self.view_sampler.cfg, "name", None)
         if sampler_name == "evaluation":
             scene_key = f"{self.scene_name}_{idx:04d}"
         else:
@@ -370,74 +411,6 @@ class DatasetTUMORB(Dataset):
             dummy_intrinsics,
         )
 
-        # 读取 context 图像并同步构造最终 K
-        context_images = []
-        context_intrinsics = []
-        for i in context_indices.tolist():
-            img, K = self._process_image_and_K(self.samples[i]["image_path"])
-            context_images.append(img)
-            context_intrinsics.append(K)
-
-        target_images = []
-        target_intrinsics = []
-        for i in target_indices.tolist():
-            img, K = self._process_image_and_K(self.samples[i]["image_path"])
-            target_images.append(img)
-            target_intrinsics.append(K)
-
-        context_images = torch.stack(context_images, dim=0)
-        target_images = torch.stack(target_images, dim=0)
-        context_intrinsics = torch.stack(context_intrinsics, dim=0)
-        target_intrinsics = torch.stack(target_intrinsics, dim=0)
-        # print("context idx =", context_indices)
-        # print("target idx  =", target_indices)
-        example = {
-            "context": {
-                "extrinsics": all_extrinsics[context_indices],
-                "intrinsics": context_intrinsics,
-                "image": context_images,
-                "near": self._get_bound(self.cfg.near, len(context_indices)),
-                "far": self._get_bound(self.cfg.far, len(context_indices)),
-                "index": context_indices,
-            },
-            "target": {
-                "extrinsics": all_extrinsics[target_indices],
-                "intrinsics": target_intrinsics,
-                "image": target_images,
-                "near": self._get_bound(self.cfg.near, len(target_indices)),
-                "far": self._get_bound(self.cfg.far, len(target_indices)),
-                "index": target_indices,
-            },
-            "scene": scene_key,   # 注意：这里也返回 scene_key
-        }
-        return example
-
-    '''
-    def __getitem__(self, idx):
-        """
-        用整个序列的 pose 做 view sampling，
-        但在 test 阶段强制只保留 1 个 target，避免一整段 target 过慢。
-        """
-        # 先拿整段序列的 pose / K（K 先用虚拟占位，仅供 sampler 使用）
-        # sampler 主要依赖视图数量 / 序列布局，真正的 K 会在下方按具体帧构造
-        dummy_intrinsics = torch.stack(
-            [self._base_pixel_K() for _ in range(len(self.samples))], dim=0
-        )
-
-        context_indices, target_indices = self.view_sampler.sample(
-            self.scene_name,
-            torch.stack([x["extrinsics"] for x in self.samples], dim=0),
-            dummy_intrinsics,
-        )
-
-        # 测试阶段只保留 1 个 target
-        # if self.stage == "test":
-        #     if len(target_indices) > 1:
-        #         # 取中间的一个 target，比 target_indices[:1] 更稳一点
-        #         mid = len(target_indices) // 2
-        #         target_indices = target_indices[mid : mid + 1]
-
-        # 读取 context 图像并同步构造最终 K
         context_images = []
         context_intrinsics = []
         for i in context_indices.tolist():
@@ -457,9 +430,6 @@ class DatasetTUMORB(Dataset):
         context_intrinsics = torch.stack(context_intrinsics, dim=0)
         target_intrinsics = torch.stack(target_intrinsics, dim=0)
 
-        all_extrinsics = torch.stack([x["extrinsics"] for x in self.samples], dim=0)
-        print("context idx =", context_indices)
-        print("target idx  =", target_indices)
         example = {
             "context": {
                 "extrinsics": all_extrinsics[context_indices],
@@ -477,7 +447,6 @@ class DatasetTUMORB(Dataset):
                 "far": self._get_bound(self.cfg.far, len(target_indices)),
                 "index": target_indices,
             },
-            "scene": self.scene_name,
+            "scene": scene_key,
         }
         return example
-        '''

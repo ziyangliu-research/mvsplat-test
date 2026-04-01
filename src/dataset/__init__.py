@@ -3,7 +3,6 @@ from torch.utils.data import Dataset
 from ..misc.step_tracker import StepTracker
 from .dataset_re10k import DatasetRE10k, DatasetRE10kCfg
 from .dataset_tum_orb import DatasetTUMORB, DatasetTUMORBCfg
-
 from .types import Stage
 from .view_sampler import get_view_sampler
 
@@ -12,8 +11,6 @@ DATASETS: dict[str, Dataset] = {
     "tum_orb": DatasetTUMORB,
 }
 
-
-# DatasetCfg = DatasetRE10kCfg
 DatasetCfg = DatasetRE10kCfg | DatasetTUMORBCfg
 
 
@@ -29,5 +26,5 @@ def get_dataset(
         cfg.cameras_are_circular,
         step_tracker,
     )
-    print(">>> get_dataset called", stage, cfg.name)
+    print(f">>> get_dataset called: stage={stage}, dataset={cfg.name}")
     return DATASETS[cfg.name](cfg, stage, view_sampler)

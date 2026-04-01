@@ -1,17 +1,17 @@
 
 defaults:
-  - view_sampler: evaluation
+  - view_sampler: bounded
 
 name: tum_orb
 
 # ---------- 数据路径 ----------
-# root: datasets/rgbd_dataset_freiburg1_xyz
-# trajectory_file: datasets/rgbd_dataset_freiburg1_xyz/groundtruth.txt
-# association_file: datasets/rgbd_dataset_freiburg1_xyz/associations.txt
+root: datasets/rgbd_dataset_freiburg1_xyz
+trajectory_file: datasets/rgbd_dataset_freiburg1_xyz/groundtruth.txt
+association_file: datasets/rgbd_dataset_freiburg1_xyz/associations.txt
 
-root: datasets/rgbd_bonn_static
-trajectory_file: datasets/rgbd_bonn_static/groundtruth.txt
-association_file: datasets/rgbd_bonn_static/associations.txt
+# root: datasets/rgbd_bonn_static
+# trajectory_file: datasets/rgbd_bonn_static/groundtruth.txt
+# association_file: datasets/rgbd_bonn_static/associations.txt
 
 image_dirname: image
 depth_dirname: depth
@@ -21,14 +21,14 @@ pose_time_tolerance: 0.02   # 秒，图像时间戳和轨迹时间戳的最近�
 
 # ---------- 相机内参（原始像素内参） ----------
 # 注意：如果 normalize_intrinsics=true，dataset_tum_orb.py 里会再除以图像宽高
-# fx: 517.306408
-# fy: 516.469215
-# cx: 318.643040
-# cy: 255.313989
-fx: 542.822841
-fy: 542.576870
-cx: 315.593520
-cy: 237.756098
+fx: 517.306408
+fy: 516.469215
+cx: 318.643040
+cy: 255.313989
+# fx: 542.822841
+# fy: 542.576870
+# cx: 315.593520
+# cy: 237.756098
 normalize_intrinsics: true
 
 # ---------- 数据集公共字段 ----------
@@ -40,7 +40,12 @@ overfit_to_scene: null
 
 # ---------- 采样 / 长度 ----------
 frame_stride: 1
-test_len: 2
+test_len: -1
+
+# ---------- train / val / test split ----------
+train_split_ratio: 0.7
+val_split_ratio: 0.15
+test_split_ratio: 0.15
 
 # ---------- MVSplat 真正使用的视锥范围 ----------
 # 这不是 DTU 的 “425.0 2.5” 那种深度采样参数；
