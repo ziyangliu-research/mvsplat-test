@@ -1,0 +1,71 @@
+defaults:
+  - view_sampler: bounded
+
+name: tum_orb
+
+# 多序列模式：每条序列一项
+# ---------- 相机内参（原始像素内参） ----------
+# 注意：如果 normalize_intrinsics=true，dataset_tum_orb.py 里会再除以图像宽高
+sequences:
+  - scene: freiburg1_plant
+    root: datasets/rgbd_dataset_freiburg1_plant
+    trajectory_file: datasets/rgbd_dataset_freiburg1_plant/groundtruth.txt
+    association_file: datasets/rgbd_dataset_freiburg1_plant/associations.txt
+    fx: 517.306408
+    fy: 516.469215
+    cx: 318.643040
+    cy: 255.313989
+
+  - scene: freiburg1_teddy
+    root: datasets/rgbd_dataset_freiburg1_teddy
+    trajectory_file: datasets/rgbd_dataset_freiburg1_teddy/groundtruth.txt
+    association_file: datasets/rgbd_dataset_freiburg1_teddy/associations.txt
+    fx: 517.306408
+    fy: 516.469215
+    cx: 318.643040
+    cy: 255.313989
+    
+  # - scene: freiburg2_coke
+  #   root: datasets/rgbd_dataset_freiburg2_coke
+  #   trajectory_file: datasets/rgbd_dataset_freiburg2_coke/groundtruth.txt
+  #   association_file: datasets/rgbd_dataset_freiburg2_coke/associations.txt
+  #   fx: 520.908620
+  #   fy: 521.007327
+  #   cx: 325.141442
+  #   cy: 249.701764
+
+  # - scene: bonn_static
+  #   root: datasets/rgbd_bonn_static
+  #   trajectory_file: datasets/rgbd_bonn_static/groundtruth.txt
+  #   association_file: datasets/rgbd_bonn_static/associations.txt
+  #   fx: 542.822841
+  #   fy: 542.576870
+  #   cx: 315.593520
+  #   cy: 237.756098
+
+normalize_intrinsics: true
+image_dirname: image
+depth_dirname: depth
+
+# ---------- 图像-轨迹时间戳对齐 ----------
+pose_time_tolerance: 0.02   # 秒，图像时间戳和轨迹时间戳的最近邻匹配容忍范围
+
+image_shape: [256, 256]
+background_color: [0.0, 0.0, 0.0]
+cameras_are_circular: false
+overfit_to_scene: null
+
+# ---------- 采样 / 长度 ----------
+frame_stride: 1
+test_len: -1
+
+# ---------- train / val / test split ----------
+train_split_ratio: 0.7
+val_split_ratio: 0.15
+test_split_ratio: 0.15
+
+# ---------- MVSplat 真正使用的视锥范围 ----------
+# 这不是 DTU 的 “425.0 2.5” 那种深度采样参数；
+# 当前项目里 near/far 是由 dataset 直接提供给 batch 的。[5](https://github.com/donydchen/mvsplat)
+near: 0.1
+far: 8.0

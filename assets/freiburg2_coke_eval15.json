@@ -1,0 +1,137 @@
+{
+  "freiburg2_coke_0000": {
+    "context": [
+      25,
+      35
+    ],
+    "target": [
+      30
+    ]
+  },
+  "freiburg2_coke_0001": {
+    "context": [
+      15,
+      45
+    ],
+    "target": [
+      30
+    ]
+  },
+  "freiburg2_coke_0002": {
+    "context": [
+      0,
+      60
+    ],
+    "target": [
+      30
+    ]
+  },
+  "freiburg2_coke_0003": {
+    "context": [
+      628,
+      638
+    ],
+    "target": [
+      633
+    ]
+  },
+  "freiburg2_coke_0004": {
+    "context": [
+      618,
+      648
+    ],
+    "target": [
+      633
+    ]
+  },
+  "freiburg2_coke_0005": {
+    "context": [
+      603,
+      663
+    ],
+    "target": [
+      633
+    ]
+  },
+  "freiburg2_coke_0006": {
+    "context": [
+      1231,
+      1241
+    ],
+    "target": [
+      1236
+    ]
+  },
+  "freiburg2_coke_0007": {
+    "context": [
+      1221,
+      1251
+    ],
+    "target": [
+      1236
+    ]
+  },
+  "freiburg2_coke_0008": {
+    "context": [
+      1206,
+      1266
+    ],
+    "target": [
+      1236
+    ]
+  },
+  "freiburg2_coke_0009": {
+    "context": [
+      1833,
+      1843
+    ],
+    "target": [
+      1838
+    ]
+  },
+  "freiburg2_coke_0010": {
+    "context": [
+      1823,
+      1853
+    ],
+    "target": [
+      1838
+    ]
+  },
+  "freiburg2_coke_0011": {
+    "context": [
+      1808,
+      1868
+    ],
+    "target": [
+      1838
+    ]
+  },
+  "freiburg2_coke_0012": {
+    "context": [
+      2436,
+      2446
+    ],
+    "target": [
+      2441
+    ]
+  },
+  "freiburg2_coke_0013": {
+    "context": [
+      2426,
+      2456
+    ],
+    "target": [
+      2441
+    ]
+  },
+  "freiburg2_coke_0014": {
+    "context": [
+      2411,
+      2471
+    ],
+    "target": [
+      2441
+    ]
+  }
+}

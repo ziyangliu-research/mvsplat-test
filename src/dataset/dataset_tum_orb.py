@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Literal, Optional
 import bisect
@@ -12,129 +12,216 @@ from .dataset import DatasetCfgCommon
 from .types import Stage
 from .view_sampler import ViewSampler
 
-
 @dataclass
-class DatasetTUMORBCfg(DatasetCfgCommon):
-    name: Literal["tum_orb"]
-
-    # ---------- 数据路径 ----------
+class SequenceCfg:
+    scene: str
     root: Path
     trajectory_file: Path
     association_file: Optional[Path] = None
-    image_dirname: str = "image"
-    depth_dirname: str = "depth"
-
-    # ---------- 图像-轨迹时间戳匹配 ----------
-    pose_time_tolerance: float = 0.02
-
-    # ---------- 原始像素内参 ----------
     fx: float = 542.822841
     fy: float = 542.576870
     cx: float = 315.593520
     cy: float = 237.756098
 
-    # 输出 normalized K
+@dataclass
+class DatasetTUMORBCfg(DatasetCfgCommon):
+    name: Literal["tum_orb"]
+
+    # ---------- 多序列模式 ----------
+    sequences: list[SequenceCfg] = field(default_factory=list)
+
+    # ---------- 单序列 fallback ----------
+    root: Optional[Path] = None
+    trajectory_file: Optional[Path] = None
+    association_file: Optional[Path] = None
+
+    image_dirname: str = "image"
+    depth_dirname: str = "depth"
+
+    pose_time_tolerance: float = 0.02
+
+    # 单序列 fallback 的默认内参
+    fx: float = 542.822841
+    fy: float = 542.576870
+    cx: float = 315.593520
+    cy: float = 237.756098
+
     normalize_intrinsics: bool = True
 
-    # ---------- 采样 ----------
     frame_stride: int = 1
 
-    # ---------- train/val/test 切分 ----------
     train_split_ratio: float = 0.7
     val_split_ratio: float = 0.15
-    # test 比例默认用剩余部分，不单独配也行；这里留着更清晰
     test_split_ratio: float = 0.15
 
-    # ---------- debug / evaluation ----------
     test_len: int = -1
 
-    # ---------- 视锥范围 ----------
     near: float = 0.1
     far: float = 8.0
 
-
 class DatasetTUMORB(Dataset):
-    def __init__(
-        self,
-        cfg: DatasetTUMORBCfg,
-        stage: Stage,
-        view_sampler: ViewSampler,
-    ) -> None:
+    def __init__(self, cfg: DatasetTUMORBCfg, stage: Stage, view_sampler: ViewSampler):
         super().__init__()
         self.cfg = cfg
         self.stage = stage
         self.view_sampler = view_sampler
         self.to_tensor = tf.ToTensor()
 
-        self.image_root = cfg.root / cfg.image_dirname
-        self.depth_root = cfg.root / cfg.depth_dirname
-        self.scene_name = cfg.root.name
+        seq_cfgs = self._build_sequence_cfgs()
+        self.scenes = []
+        self.eval_items = None
 
-        # 1) 读取 RGB 文件列表（优先 associations；否则直接遍历 image/*.png）
-        rgb_entries = self._load_rgb_entries()
+        sampler_name = getattr(self.view_sampler.cfg, "name", None)
 
-        # 2) 读取轨迹（TUM / ORB / GT 格式）
-        pose_times, pose_mats = self._load_trajectory(cfg.trajectory_file)
+        for seq_cfg in seq_cfgs:
+            samples = self._build_samples_for_sequence(seq_cfg)
+            if len(samples) == 0:
+                continue
 
-        # 3) 时间戳对齐：每张图像匹配最近的 pose
-        all_samples = []
+            # 只有非 test/evaluation 才做 split
+            if not (stage == "test" and sampler_name == "evaluation"):
+                samples = self._split_samples(samples, stage)
+
+            if len(samples) == 0:
+                continue
+
+            self.scenes.append(
+                {
+                    "scene_name": seq_cfg.scene,
+                    "samples": samples,
+                    "fx": seq_cfg.fx,
+                    "fy": seq_cfg.fy,
+                    "cx": seq_cfg.cx,
+                    "cy": seq_cfg.cy,
+                }
+            )
+
+        if len(self.scenes) == 0:
+            raise RuntimeError(f"No valid scenes found for stage={stage}.")
+
+        # 如果是 evaluation 模式，为每个 scene 构建可用的 eval item 列表
+        if stage == "test" and sampler_name == "evaluation":
+            self.eval_items = self._build_eval_items()
+            if self.cfg.test_len > 0:
+                self.eval_items = self.eval_items[: self.cfg.test_len]
+
+            if len(self.eval_items) == 0:
+                raise RuntimeError(
+                    "Evaluation mode is enabled, but no matching scene keys were found "
+                    "between dataset scenes and evaluation JSON index."
+                )
+    def _build_eval_items(self):
+        """
+        多序列 + evaluation JSON 支持：
+        从 view_sampler.index 中找出和每个 scene 匹配的 key，
+        例如：
+            freiburg2_coke_0000
+            freiburg2_coke_0001
+            ...
+        然后建立一份全局 eval_items 列表。
+        """
+        if not hasattr(self.view_sampler, "index") or self.view_sampler.index is None:
+            raise RuntimeError(
+                "Evaluation sampler does not expose `index`. "
+                "Please check your evaluation view sampler implementation."
+            )
+
+        raw_index = self.view_sampler.index
+
+        if isinstance(raw_index, dict):
+            all_keys = list(raw_index.keys())
+        elif isinstance(raw_index, list):
+            # 有些实现可能直接给 list[str]
+            all_keys = list(raw_index)
+        else:
+            raise RuntimeError(
+                f"Unsupported evaluation index type: {type(raw_index)}"
+            )
+
+        eval_items = []
+
+        def sort_key(scene_key: str):
+            # 兼容 xxx_0000 这种 key；没有数字后缀则排到前面
+            suffix = scene_key.rsplit("_", 1)[-1]
+            if suffix.isdigit():
+                return (0, int(suffix))
+            return (1, scene_key)
+
+        for scene_idx, scene in enumerate(self.scenes):
+            scene_name = scene["scene_name"]
+
+            matched_keys = [
+                k for k in all_keys
+                if k == scene_name or k.startswith(f"{scene_name}_")
+            ]
+            matched_keys = sorted(matched_keys, key=sort_key)
+
+            for local_eval_idx, scene_key in enumerate(matched_keys):
+                eval_items.append(
+                    {
+                        "scene_idx": scene_idx,
+                        "scene_name": scene_name,
+                        "scene_key": scene_key,
+                        "local_eval_idx": local_eval_idx,
+                    }
+                )
+
+        return eval_items
+        
+    def _build_sequence_cfgs(self):
+        if len(self.cfg.sequences) > 0:
+            return self.cfg.sequences
+
+        if self.cfg.root is None or self.cfg.trajectory_file is None:
+            raise RuntimeError(
+                "tum_orb config must provide either `sequences` or (`root`, `trajectory_file`)."
+            )
+
+        scene_name = self.cfg.root.name
+        return [
+            SequenceCfg(
+                scene=scene_name,
+                root=self.cfg.root,
+                trajectory_file=self.cfg.trajectory_file,
+                association_file=self.cfg.association_file,
+                fx=self.cfg.fx,
+                fy=self.cfg.fy,
+                cx=self.cfg.cx,
+                cy=self.cfg.cy,
+            )
+        ]
+
+    def _build_samples_for_sequence(self, seq_cfg: SequenceCfg):
+        image_root = seq_cfg.root / self.cfg.image_dirname
+        depth_root = seq_cfg.root / self.cfg.depth_dirname
+
+        rgb_entries = self._load_rgb_entries(seq_cfg, image_root, depth_root)
+        pose_times, pose_mats = self._load_trajectory(seq_cfg.trajectory_file)
+
+        samples = []
         for ts, img_path, depth_path in rgb_entries:
-            Twc = self._match_pose(ts, pose_times, pose_mats, cfg.pose_time_tolerance)
+            Twc = self._match_pose(ts, pose_times, pose_mats, self.cfg.pose_time_tolerance)
             if Twc is None:
                 continue
-            all_samples.append(
+
+            samples.append(
                 {
                     "timestamp": ts,
                     "image_path": img_path,
                     "depth_path": depth_path,
-                    "extrinsics": Twc,  # 4x4 Twc
+                    "extrinsics": Twc,
+                    "scene_name": seq_cfg.scene,
+                    "fx": seq_cfg.fx,
+                    "fy": seq_cfg.fy,
+                    "cx": seq_cfg.cx,
+                    "cy": seq_cfg.cy,
                 }
             )
 
-        if cfg.frame_stride > 1:
-            all_samples = all_samples[:: cfg.frame_stride]
+        if self.cfg.frame_stride > 1:
+            samples = samples[:: self.cfg.frame_stride]
 
-        if len(all_samples) == 0:
-            raise RuntimeError("No valid RGB-pose pairs found for TUM/ORB dataset.")
-
-        self.all_samples = all_samples
-        self.eval_len = None
-
-        sampler_name = getattr(self.view_sampler.cfg, "name", None)
-
-        # ------------------------------------------------------------------
-        # 训练/验证：按 contiguous split 切分序列
-        # 测试：
-        #   - 如果是 evaluation sampler，保留完整 self.all_samples，
-        #     因为你的 JSON 索引是基于完整序列定义的
-        #   - 否则走普通 split
-        # ------------------------------------------------------------------
-        if stage == "test" and sampler_name == "evaluation":
-            self.samples = self.all_samples
-            if cfg.test_len > 0:
-                self.eval_len = cfg.test_len
-            else:
-                # evaluation sampler 通常有 index_path；如果没有，就退回全长
-                self.eval_len = getattr(self.view_sampler, "index", None)
-                if self.eval_len is not None:
-                    self.eval_len = len(self.view_sampler.index)
-                else:
-                    self.eval_len = len(self.samples)
-        else:
-            self.samples = self._split_samples(self.all_samples, stage)
-
-            if stage == "test" and cfg.test_len > 0:
-                self.samples = self.samples[: cfg.test_len]
-
-        if len(self.samples) == 0:
-            raise RuntimeError(
-                f"No samples left after stage split. stage={stage}, root={cfg.root}"
-            )
-
-        print(
-            f">>> DatasetTUMORB init: stage={stage}, sampler={sampler_name}, "
-            f"all={len(self.all_samples)}, used={len(self.samples)}, scene={self.scene_name}"
-        )
+        return samples    
 
     # -------------------------------------------------------------------------
     # split
@@ -185,38 +272,29 @@ class DatasetTUMORB(Dataset):
     # -------------------------------------------------------------------------
     # 数据读取
     # -------------------------------------------------------------------------
-    def _load_rgb_entries(self):
-        """
-        返回:
-            list[(timestamp, image_path, depth_path_or_None)]
-        """
+    def _load_rgb_entries(self, seq_cfg: SequenceCfg, image_root: Path, depth_root: Path):
         entries = []
 
-        # 如果存在 associations.txt，优先使用
-        if self.cfg.association_file is not None and self.cfg.association_file.exists():
-            with self.cfg.association_file.open("r") as f:
+        if seq_cfg.association_file is not None and seq_cfg.association_file.exists():
+            with seq_cfg.association_file.open("r") as f:
                 for line in f:
                     line = line.strip()
                     if not line or line.startswith("#"):
                         continue
                     parts = line.split()
-
-                    # 常见 TUM association:
-                    # rgb_ts rgb_path depth_ts depth_path
                     if len(parts) >= 4:
                         rgb_ts = float(parts[0])
-                        img_path = self.cfg.root / parts[1]
-                        depth_path = self.cfg.root / parts[3]
+                        img_path = seq_cfg.root / parts[1]
+                        depth_path = seq_cfg.root / parts[3]
                         entries.append((rgb_ts, img_path, depth_path))
                     elif len(parts) >= 2:
                         rgb_ts = float(parts[0])
-                        img_path = self.cfg.root / parts[1]
+                        img_path = seq_cfg.root / parts[1]
                         entries.append((rgb_ts, img_path, None))
         else:
-            # 直接遍历 image/*.png，文件名 stem 作为时间戳
-            for p in sorted(self.image_root.glob("*.png")):
+            for p in sorted(image_root.glob("*.png")):
                 ts = float(p.stem)
-                depth_path = self.depth_root / f"{p.stem}.png"
+                depth_path = depth_root / f"{p.stem}.png"
                 if not depth_path.exists():
                     depth_path = None
                 entries.append((ts, p, depth_path))
@@ -321,28 +399,32 @@ class DatasetTUMORB(Dataset):
         K[0, 2] = self.cfg.cx
         K[1, 2] = self.cfg.cy
         return K
-
+    
+    def _base_pixel_K_from_sample(self, sample):
+        K = torch.eye(3, dtype=torch.float32)
+        K[0, 0] = sample["fx"]
+        K[1, 1] = sample["fy"]
+        K[0, 2] = sample["cx"]
+        K[1, 2] = sample["cy"]
+        return K
+    
     # -------------------------------------------------------------------------
     # 图像几何处理
     # -------------------------------------------------------------------------
-    def _process_image_and_K(self, image_path: Path):
-        """
-        原图 -> 保持比例 resize -> center crop
-             -> 同步更新像素 K -> 可选 normalized K
-        """
+    def _process_image_and_K(self, sample):
+        image_path = sample["image_path"]
+
         with Image.open(image_path) as im:
             im = im.convert("RGB")
 
             orig_w, orig_h = im.size
-            K = self._base_pixel_K()
+            K = self._base_pixel_K_from_sample(sample)
 
             target_h, target_w = self.cfg.image_shape
 
-            # 保持比例 resize，使短边覆盖目标大小
             scale = max(target_w / orig_w, target_h / orig_h)
             resized_w = int(round(orig_w * scale))
             resized_h = int(round(orig_h * scale))
-
             im = im.resize((resized_w, resized_h), Image.BILINEAR)
 
             K[0, 0] *= scale
@@ -350,7 +432,6 @@ class DatasetTUMORB(Dataset):
             K[0, 2] *= scale
             K[1, 2] *= scale
 
-            # center crop
             left = int(round((resized_w - target_w) / 2.0))
             top = int(round((resized_h - target_h) / 2.0))
             right = left + target_w
@@ -377,76 +458,74 @@ class DatasetTUMORB(Dataset):
         return torch.full((n_views,), float(value), dtype=torch.float32)
 
     def __len__(self):
-        if self.eval_len is not None:
-            return self.eval_len
-        return len(self.samples)
+            if self.eval_items is not None:
+                return len(self.eval_items)
+            return len(self.scenes)
 
     # -------------------------------------------------------------------------
     # 主接口
     # -------------------------------------------------------------------------
     def __getitem__(self, idx):
-        """
-        支持两种模式：
-        1) bounded / arbitrary 等普通 sampler
-        2) evaluation sampler：通过 JSON 精确控制 context / target
-        """
-        sampler_name = getattr(self.view_sampler.cfg, "name", None)
+            if self.eval_items is not None:
+                eval_item = self.eval_items[idx]
+                scene = self.scenes[eval_item["scene_idx"]]
+                scene_key = eval_item["scene_key"]   # e.g. freiburg2_coke_0003
+            else:
+                scene = self.scenes[idx]
+                scene_key = scene["scene_name"]
 
-        # 当前 self.samples:
-        # - train/val/bounded-test: 已是 stage split 后的子序列
-        # - test/evaluation: 保留完整序列
-        all_extrinsics = torch.stack([x["extrinsics"] for x in self.samples], dim=0)
-        dummy_intrinsics = torch.stack(
-            [self._base_pixel_K() for _ in range(len(self.samples))], dim=0
-        )
+            scene_name = scene["scene_name"]
+            samples = scene["samples"]
 
-        if sampler_name == "evaluation":
-            scene_key = f"{self.scene_name}_{idx:04d}"
-        else:
-            scene_key = self.scene_name
+            all_extrinsics = torch.stack([x["extrinsics"] for x in samples], dim=0)
 
-        context_indices, target_indices = self.view_sampler.sample(
-            scene_key,
-            all_extrinsics,
-            dummy_intrinsics,
-        )
+            dummy_intrinsics = torch.stack(
+                [self._base_pixel_K_from_sample(x) for x in samples], dim=0
+            )
 
-        context_images = []
-        context_intrinsics = []
-        for i in context_indices.tolist():
-            img, K = self._process_image_and_K(self.samples[i]["image_path"])
-            context_images.append(img)
-            context_intrinsics.append(K)
+            context_indices, target_indices = self.view_sampler.sample(
+                scene_key,
+                all_extrinsics,
+                dummy_intrinsics,
+            )
 
-        target_images = []
-        target_intrinsics = []
-        for i in target_indices.tolist():
-            img, K = self._process_image_and_K(self.samples[i]["image_path"])
-            target_images.append(img)
-            target_intrinsics.append(K)
+            context_images = []
+            context_intrinsics = []
+            for i in context_indices.tolist():
+                img, K = self._process_image_and_K(samples[i])
+                context_images.append(img)
+                context_intrinsics.append(K)
 
-        context_images = torch.stack(context_images, dim=0)
-        target_images = torch.stack(target_images, dim=0)
-        context_intrinsics = torch.stack(context_intrinsics, dim=0)
-        target_intrinsics = torch.stack(target_intrinsics, dim=0)
+            target_images = []
+            target_intrinsics = []
+            for i in target_indices.tolist():
+                img, K = self._process_image_and_K(samples[i])
+                target_images.append(img)
+                target_intrinsics.append(K)
 
-        example = {
-            "context": {
-                "extrinsics": all_extrinsics[context_indices],
-                "intrinsics": context_intrinsics,
-                "image": context_images,
-                "near": self._get_bound(self.cfg.near, len(context_indices)),
-                "far": self._get_bound(self.cfg.far, len(context_indices)),
-                "index": context_indices,
-            },
-            "target": {
-                "extrinsics": all_extrinsics[target_indices],
-                "intrinsics": target_intrinsics,
-                "image": target_images,
-                "near": self._get_bound(self.cfg.near, len(target_indices)),
-                "far": self._get_bound(self.cfg.far, len(target_indices)),
-                "index": target_indices,
-            },
-            "scene": scene_key,
-        }
-        return example
+            context_images = torch.stack(context_images, dim=0)
+            target_images = torch.stack(target_images, dim=0)
+            context_intrinsics = torch.stack(context_intrinsics, dim=0)
+            target_intrinsics = torch.stack(target_intrinsics, dim=0)
+
+            example = {
+                "context": {
+                    "extrinsics": all_extrinsics[context_indices],
+                    "intrinsics": context_intrinsics,
+                    "image": context_images,
+                    "near": self._get_bound(self.cfg.near, len(context_indices)),
+                    "far": self._get_bound(self.cfg.far, len(context_indices)),
+                    "index": context_indices,
+                },
+                "target": {
+                    "extrinsics": all_extrinsics[target_indices],
+                    "intrinsics": target_intrinsics,
+                    "image": target_images,
+                    "near": self._get_bound(self.cfg.near, len(target_indices)),
+                    "far": self._get_bound(self.cfg.far, len(target_indices)),
+                    "index": target_indices,
+                },
+                "scene": scene_key,
+                "scene_name": scene_name,
+            }
+            return example

@@ -1,0 +1,29 @@
+defaults:
+  - view_sampler: evaluation
+
+name: tum_orb
+sequences:
+  - scene: freiburg2_coke
+    root: datasets/rgbd_dataset_freiburg2_coke
+    trajectory_file: datasets/rgbd_dataset_freiburg2_coke/groundtruth.txt
+    association_file: datasets/rgbd_dataset_freiburg2_coke/associations.txt
+    fx: 520.908620
+    fy: 521.007327
+    cx: 325.141442
+    cy: 249.701764
+
+normalize_intrinsics: true
+image_dirname: image
+depth_dirname: depth
+pose_time_tolerance: 0.02
+image_shape: [256, 256]
+background_color: [0.0, 0.0, 0.0]
+cameras_are_circular: false
+overfit_to_scene: null
+frame_stride: 1
+train_split_ratio: 0.7
+val_split_ratio: 0.15
+test_split_ratio: 0.15
+test_len: -1
+near: 0.1
+far: 8.0
