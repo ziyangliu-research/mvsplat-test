@@ -1,0 +1,782 @@
+{
+  "MH_03_medium_0000": {
+    "context": [
+      2236
+    ],
+    "target": [
+      2237
+    ],
+    "meta": {
+      "context_time_index": 2236,
+      "target_time_index": 2237,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0001": {
+    "context": [
+      2236
+    ],
+    "target": [
+      2239
+    ],
+    "meta": {
+      "context_time_index": 2236,
+      "target_time_index": 2239,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0002": {
+    "context": [
+      2236
+    ],
+    "target": [
+      2241
+    ],
+    "meta": {
+      "context_time_index": 2236,
+      "target_time_index": 2241,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0003": {
+    "context": [
+      2256
+    ],
+    "target": [
+      2257
+    ],
+    "meta": {
+      "context_time_index": 2256,
+      "target_time_index": 2257,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0004": {
+    "context": [
+      2256
+    ],
+    "target": [
+      2259
+    ],
+    "meta": {
+      "context_time_index": 2256,
+      "target_time_index": 2259,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0005": {
+    "context": [
+      2256
+    ],
+    "target": [
+      2261
+    ],
+    "meta": {
+      "context_time_index": 2256,
+      "target_time_index": 2261,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0006": {
+    "context": [
+      2277
+    ],
+    "target": [
+      2278
+    ],
+    "meta": {
+      "context_time_index": 2277,
+      "target_time_index": 2278,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0007": {
+    "context": [
+      2277
+    ],
+    "target": [
+      2280
+    ],
+    "meta": {
+      "context_time_index": 2277,
+      "target_time_index": 2280,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0008": {
+    "context": [
+      2277
+    ],
+    "target": [
+      2282
+    ],
+    "meta": {
+      "context_time_index": 2277,
+      "target_time_index": 2282,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0009": {
+    "context": [
+      2297
+    ],
+    "target": [
+      2298
+    ],
+    "meta": {
+      "context_time_index": 2297,
+      "target_time_index": 2298,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0010": {
+    "context": [
+      2297
+    ],
+    "target": [
+      2300
+    ],
+    "meta": {
+      "context_time_index": 2297,
+      "target_time_index": 2300,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0011": {
+    "context": [
+      2297
+    ],
+    "target": [
+      2302
+    ],
+    "meta": {
+      "context_time_index": 2297,
+      "target_time_index": 2302,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0012": {
+    "context": [
+      2318
+    ],
+    "target": [
+      2319
+    ],
+    "meta": {
+      "context_time_index": 2318,
+      "target_time_index": 2319,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0013": {
+    "context": [
+      2318
+    ],
+    "target": [
+      2321
+    ],
+    "meta": {
+      "context_time_index": 2318,
+      "target_time_index": 2321,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0014": {
+    "context": [
+      2318
+    ],
+    "target": [
+      2323
+    ],
+    "meta": {
+      "context_time_index": 2318,
+      "target_time_index": 2323,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0015": {
+    "context": [
+      2338
+    ],
+    "target": [
+      2339
+    ],
+    "meta": {
+      "context_time_index": 2338,
+      "target_time_index": 2339,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0016": {
+    "context": [
+      2338
+    ],
+    "target": [
+      2341
+    ],
+    "meta": {
+      "context_time_index": 2338,
+      "target_time_index": 2341,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0017": {
+    "context": [
+      2338
+    ],
+    "target": [
+      2343
+    ],
+    "meta": {
+      "context_time_index": 2338,
+      "target_time_index": 2343,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0018": {
+    "context": [
+      2359
+    ],
+    "target": [
+      2360
+    ],
+    "meta": {
+      "context_time_index": 2359,
+      "target_time_index": 2360,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0019": {
+    "context": [
+      2359
+    ],
+    "target": [
+      2362
+    ],
+    "meta": {
+      "context_time_index": 2359,
+      "target_time_index": 2362,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0020": {
+    "context": [
+      2359
+    ],
+    "target": [
+      2364
+    ],
+    "meta": {
+      "context_time_index": 2359,
+      "target_time_index": 2364,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0021": {
+    "context": [
+      2379
+    ],
+    "target": [
+      2380
+    ],
+    "meta": {
+      "context_time_index": 2379,
+      "target_time_index": 2380,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0022": {
+    "context": [
+      2379
+    ],
+    "target": [
+      2382
+    ],
+    "meta": {
+      "context_time_index": 2379,
+      "target_time_index": 2382,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0023": {
+    "context": [
+      2379
+    ],
+    "target": [
+      2384
+    ],
+    "meta": {
+      "context_time_index": 2379,
+      "target_time_index": 2384,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0024": {
+    "context": [
+      2400
+    ],
+    "target": [
+      2401
+    ],
+    "meta": {
+      "context_time_index": 2400,
+      "target_time_index": 2401,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0025": {
+    "context": [
+      2400
+    ],
+    "target": [
+      2403
+    ],
+    "meta": {
+      "context_time_index": 2400,
+      "target_time_index": 2403,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0026": {
+    "context": [
+      2400
+    ],
+    "target": [
+      2405
+    ],
+    "meta": {
+      "context_time_index": 2400,
+      "target_time_index": 2405,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0027": {
+    "context": [
+      2420
+    ],
+    "target": [
+      2421
+    ],
+    "meta": {
+      "context_time_index": 2420,
+      "target_time_index": 2421,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0028": {
+    "context": [
+      2420
+    ],
+    "target": [
+      2423
+    ],
+    "meta": {
+      "context_time_index": 2420,
+      "target_time_index": 2423,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0029": {
+    "context": [
+      2420
+    ],
+    "target": [
+      2425
+    ],
+    "meta": {
+      "context_time_index": 2420,
+      "target_time_index": 2425,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0030": {
+    "context": [
+      2441
+    ],
+    "target": [
+      2442
+    ],
+    "meta": {
+      "context_time_index": 2441,
+      "target_time_index": 2442,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0031": {
+    "context": [
+      2441
+    ],
+    "target": [
+      2444
+    ],
+    "meta": {
+      "context_time_index": 2441,
+      "target_time_index": 2444,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0032": {
+    "context": [
+      2441
+    ],
+    "target": [
+      2446
+    ],
+    "meta": {
+      "context_time_index": 2441,
+      "target_time_index": 2446,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0033": {
+    "context": [
+      2461
+    ],
+    "target": [
+      2462
+    ],
+    "meta": {
+      "context_time_index": 2461,
+      "target_time_index": 2462,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0034": {
+    "context": [
+      2461
+    ],
+    "target": [
+      2464
+    ],
+    "meta": {
+      "context_time_index": 2461,
+      "target_time_index": 2464,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0035": {
+    "context": [
+      2461
+    ],
+    "target": [
+      2466
+    ],
+    "meta": {
+      "context_time_index": 2461,
+      "target_time_index": 2466,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0036": {
+    "context": [
+      2482
+    ],
+    "target": [
+      2483
+    ],
+    "meta": {
+      "context_time_index": 2482,
+      "target_time_index": 2483,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0037": {
+    "context": [
+      2482
+    ],
+    "target": [
+      2485
+    ],
+    "meta": {
+      "context_time_index": 2482,
+      "target_time_index": 2485,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0038": {
+    "context": [
+      2482
+    ],
+    "target": [
+      2487
+    ],
+    "meta": {
+      "context_time_index": 2482,
+      "target_time_index": 2487,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0039": {
+    "context": [
+      2502
+    ],
+    "target": [
+      2503
+    ],
+    "meta": {
+      "context_time_index": 2502,
+      "target_time_index": 2503,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0040": {
+    "context": [
+      2502
+    ],
+    "target": [
+      2505
+    ],
+    "meta": {
+      "context_time_index": 2502,
+      "target_time_index": 2505,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0041": {
+    "context": [
+      2502
+    ],
+    "target": [
+      2507
+    ],
+    "meta": {
+      "context_time_index": 2502,
+      "target_time_index": 2507,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0042": {
+    "context": [
+      2523
+    ],
+    "target": [
+      2524
+    ],
+    "meta": {
+      "context_time_index": 2523,
+      "target_time_index": 2524,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0043": {
+    "context": [
+      2523
+    ],
+    "target": [
+      2526
+    ],
+    "meta": {
+      "context_time_index": 2523,
+      "target_time_index": 2526,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0044": {
+    "context": [
+      2523
+    ],
+    "target": [
+      2528
+    ],
+    "meta": {
+      "context_time_index": 2523,
+      "target_time_index": 2528,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0045": {
+    "context": [
+      2543
+    ],
+    "target": [
+      2544
+    ],
+    "meta": {
+      "context_time_index": 2543,
+      "target_time_index": 2544,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0046": {
+    "context": [
+      2543
+    ],
+    "target": [
+      2546
+    ],
+    "meta": {
+      "context_time_index": 2543,
+      "target_time_index": 2546,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0047": {
+    "context": [
+      2543
+    ],
+    "target": [
+      2548
+    ],
+    "meta": {
+      "context_time_index": 2543,
+      "target_time_index": 2548,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0048": {
+    "context": [
+      2564
+    ],
+    "target": [
+      2565
+    ],
+    "meta": {
+      "context_time_index": 2564,
+      "target_time_index": 2565,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0049": {
+    "context": [
+      2564
+    ],
+    "target": [
+      2567
+    ],
+    "meta": {
+      "context_time_index": 2564,
+      "target_time_index": 2567,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0050": {
+    "context": [
+      2564
+    ],
+    "target": [
+      2569
+    ],
+    "meta": {
+      "context_time_index": 2564,
+      "target_time_index": 2569,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0051": {
+    "context": [
+      2584
+    ],
+    "target": [
+      2585
+    ],
+    "meta": {
+      "context_time_index": 2584,
+      "target_time_index": 2585,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0052": {
+    "context": [
+      2584
+    ],
+    "target": [
+      2587
+    ],
+    "meta": {
+      "context_time_index": 2584,
+      "target_time_index": 2587,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0053": {
+    "context": [
+      2584
+    ],
+    "target": [
+      2589
+    ],
+    "meta": {
+      "context_time_index": 2584,
+      "target_time_index": 2589,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0054": {
+    "context": [
+      2605
+    ],
+    "target": [
+      2606
+    ],
+    "meta": {
+      "context_time_index": 2605,
+      "target_time_index": 2606,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0055": {
+    "context": [
+      2605
+    ],
+    "target": [
+      2608
+    ],
+    "meta": {
+      "context_time_index": 2605,
+      "target_time_index": 2608,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0056": {
+    "context": [
+      2605
+    ],
+    "target": [
+      2610
+    ],
+    "meta": {
+      "context_time_index": 2605,
+      "target_time_index": 2610,
+      "target_offset": 5
+    }
+  },
+  "MH_03_medium_0057": {
+    "context": [
+      2625
+    ],
+    "target": [
+      2626
+    ],
+    "meta": {
+      "context_time_index": 2625,
+      "target_time_index": 2626,
+      "target_offset": 1
+    }
+  },
+  "MH_03_medium_0058": {
+    "context": [
+      2625
+    ],
+    "target": [
+      2628
+    ],
+    "meta": {
+      "context_time_index": 2625,
+      "target_time_index": 2628,
+      "target_offset": 3
+    }
+  },
+  "MH_03_medium_0059": {
+    "context": [
+      2625
+    ],
+    "target": [
+      2630
+    ],
+    "meta": {
+      "context_time_index": 2625,
+      "target_time_index": 2630,
+      "target_offset": 5
+    }
+  }
+}

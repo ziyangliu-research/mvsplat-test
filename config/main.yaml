@@ -7,7 +7,7 @@ defaults:
 
 wandb:
   project: mvsplat
-  entity: placeholder
+  entity: shiyo-lzy-lab
   name: placeholder
   mode: disabled
   id: null

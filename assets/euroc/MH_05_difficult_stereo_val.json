@@ -1,0 +1,392 @@
+{
+  "MH_05_difficult_0000": {
+    "context": [
+      1554
+    ],
+    "target": [
+      1555
+    ],
+    "meta": {
+      "context_time_index": 1554,
+      "target_time_index": 1555,
+      "target_offset": 1
+    }
+  },
+  "MH_05_difficult_0001": {
+    "context": [
+      1554
+    ],
+    "target": [
+      1557
+    ],
+    "meta": {
+      "context_time_index": 1554,
+      "target_time_index": 1557,
+      "target_offset": 3
+    }
+  },
+  "MH_05_difficult_0002": {
+    "context": [
+      1554
+    ],
+    "target": [
+      1559
+    ],
+    "meta": {
+      "context_time_index": 1554,
+      "target_time_index": 1559,
+      "target_offset": 5
+    }
+  },
+  "MH_05_difficult_0003": {
+    "context": [
+      1590
+    ],
+    "target": [
+      1591
+    ],
+    "meta": {
+      "context_time_index": 1590,
+      "target_time_index": 1591,
+      "target_offset": 1
+    }
+  },
+  "MH_05_difficult_0004": {
+    "context": [
+      1590
+    ],
+    "target": [
+      1593
+    ],
+    "meta": {
+      "context_time_index": 1590,
+      "target_time_index": 1593,
+      "target_offset": 3
+    }
+  },
+  "MH_05_difficult_0005": {
+    "context": [
+      1590
+    ],
+    "target": [
+      1595
+    ],
+    "meta": {
+      "context_time_index": 1590,
+      "target_time_index": 1595,
+      "target_offset": 5
+    }
+  },
+  "MH_05_difficult_0006": {
+    "context": [
+      1627
+    ],
+    "target": [
+      1628
+    ],
+    "meta": {
+      "context_time_index": 1627,
+      "target_time_index": 1628,
+      "target_offset": 1
+    }
+  },
+  "MH_05_difficult_0007": {
+    "context": [
+      1627
+    ],
+    "target": [
+      1630
+    ],
+    "meta": {
+      "context_time_index": 1627,
+      "target_time_index": 1630,
+      "target_offset": 3
+    }
+  },
+  "MH_05_difficult_0008": {
+    "context": [
+      1627
+    ],
+    "target": [
+      1632
+    ],
+    "meta": {
+      "context_time_index": 1627,
+      "target_time_index": 1632,
+      "target_offset": 5
+    }
+  },
+  "MH_05_difficult_0009": {
+    "context": [
+      1663
+    ],
+    "target": [
+      1664
+    ],
+    "meta": {
+      "context_time_index": 1663,
+      "target_time_index": 1664,
+      "target_offset": 1
+    }
+  },
+  "MH_05_difficult_0010": {
+    "context": [
+      1663
+    ],
+    "target": [
+      1666
+    ],
+    "meta": {
+      "context_time_index": 1663,
+      "target_time_index": 1666,
+      "target_offset": 3
+    }
+  },
+  "MH_05_difficult_0011": {
+    "context": [
+      1663
+    ],
+    "target": [
+      1668
+    ],
+    "meta": {
+      "context_time_index": 1663,
+      "target_time_index": 1668,
+      "target_offset": 5
+    }
+  },
+  "MH_05_difficult_0012": {
+    "context": [
+      1699
+    ],
+    "target": [
+      1700
+    ],
+    "meta": {
+      "context_time_index": 1699,
+      "target_time_index": 1700,
+      "target_offset": 1
+    }
+  },
+  "MH_05_difficult_0013": {
+    "context": [
+      1699
+    ],
+    "target": [
+      1702
+    ],
+    "meta": {
+      "context_time_index": 1699,
+      "target_time_index": 1702,
+      "target_offset": 3
+    }
+  },
+  "MH_05_difficult_0014": {
+    "context": [
+      1699
+    ],
+    "target": [
+      1704
+    ],
+    "meta": {
+      "context_time_index": 1699,
+      "target_time_index": 1704,
+      "target_offset": 5
+    }
+  },
+  "MH_05_difficult_0015": {
+    "context": [
+      1736
+    ],
+    "target": [
+      1737
+    ],
+    "meta": {
+      "context_time_index": 1736,
+      "target_time_index": 1737,
+      "target_offset": 1
+    }
+  },
+  "MH_05_difficult_0016": {
+    "context": [
+      1736
+    ],
+    "target": [
+      1739
+    ],
+    "meta": {
+      "context_time_index": 1736,
+      "target_time_index": 1739,
+      "target_offset": 3
+    }
+  },
+  "MH_05_difficult_0017": {
+    "context": [
+      1736
+    ],
+    "target": [
+      1741
+    ],
+    "meta": {
+      "context_time_index": 1736,
+      "target_time_index": 1741,
+      "target_offset": 5
+    }
+  },
+  "MH_05_difficult_0018": {
+    "context": [
+      1772
+    ],
+    "target": [
+      1773
+    ],
+    "meta": {
+      "context_time_index": 1772,
+      "target_time_index": 1773,
+      "target_offset": 1
+    }
+  },
+  "MH_05_difficult_0019": {
+    "context": [
+      1772
+    ],
+    "target": [
+      1775
+    ],
+    "meta": {
+      "context_time_index": 1772,
+      "target_time_index": 1775,
+      "target_offset": 3
+    }
+  },
+  "MH_05_difficult_0020": {
+    "context": [
+      1772
+    ],
+    "target": [
+      1777
+    ],
+    "meta": {
+      "context_time_index": 1772,
+      "target_time_index": 1777,
+      "target_offset": 5
+    }
+  },
+  "MH_05_difficult_0021": {
+    "context": [
+      1808
+    ],
+    "target": [
+      1809
+    ],
+    "meta": {
+      "context_time_index": 1808,
+      "target_time_index": 1809,
+      "target_offset": 1
+    }
+  },
+  "MH_05_difficult_0022": {
+    "context": [
+      1808
+    ],
+    "target": [
+      1811
+    ],
+    "meta": {
+      "context_time_index": 1808,
+      "target_time_index": 1811,
+      "target_offset": 3
+    }
+  },
+  "MH_05_difficult_0023": {
+    "context": [
+      1808
+    ],
+    "target": [
+      1813
+    ],
+    "meta": {
+      "context_time_index": 1808,
+      "target_time_index": 1813,
+      "target_offset": 5
+    }
+  },
+  "MH_05_difficult_0024": {
+    "context": [
+      1845
+    ],
+    "target": [
+      1846
+    ],
+    "meta": {
+      "context_time_index": 1845,
+      "target_time_index": 1846,
+      "target_offset": 1
+    }
+  },
+  "MH_05_difficult_0025": {
+    "context": [
+      1845
+    ],
+    "target": [
+      1848
+    ],
+    "meta": {
+      "context_time_index": 1845,
+      "target_time_index": 1848,
+      "target_offset": 3
+    }
+  },
+  "MH_05_difficult_0026": {
+    "context": [
+      1845
+    ],
+    "target": [
+      1850
+    ],
+    "meta": {
+      "context_time_index": 1845,
+      "target_time_index": 1850,
+      "target_offset": 5
+    }
+  },
+  "MH_05_difficult_0027": {
+    "context": [
+      1881
+    ],
+    "target": [
+      1882
+    ],
+    "meta": {
+      "context_time_index": 1881,
+      "target_time_index": 1882,
+      "target_offset": 1
+    }
+  },
+  "MH_05_difficult_0028": {
+    "context": [
+      1881
+    ],
+    "target": [
+      1884
+    ],
+    "meta": {
+      "context_time_index": 1881,
+      "target_time_index": 1884,
+      "target_offset": 3
+    }
+  },
+  "MH_05_difficult_0029": {
+    "context": [
+      1881
+    ],
+    "target": [
+      1886
+    ],
+    "meta": {
+      "context_time_index": 1881,
+      "target_time_index": 1886,
+      "target_offset": 5
+    }
+  }
+}

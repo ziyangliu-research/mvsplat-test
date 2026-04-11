@@ -1,0 +1,37 @@
+defaults:
+  - view_sampler: evaluation
+
+name: tum_orb
+stereo_as_context: true
+target_camera: left
+left_camera_dirname: cam0/data
+right_camera_dirname: cam1/data
+left_sensor_yaml: cam0/sensor.yaml
+right_sensor_yaml: cam1/sensor.yaml
+
+view_sampler:
+  num_context_views: 1
+
+sequences:
+  - scene: MH_01_easy
+    root: datasets/machine_hall/MH_01_easy/mav0
+    trajectory_file: datasets/machine_hall/MH_01_easy/mav0/state_groundtruth_estimate0/data.csv
+    association_file: null
+    fx: 0.0
+    fy: 0.0
+    cx: 0.0
+    cy: 0.0
+
+normalize_intrinsics: true
+pose_time_tolerance: 0.01
+image_shape: [256, 256]
+background_color: [0.0, 0.0, 0.0]
+cameras_are_circular: false
+overfit_to_scene: null
+frame_stride: 1
+train_split_ratio: 0.7
+val_split_ratio: 0.15
+test_split_ratio: 0.15
+test_len: -1
+near: 0.1
+far: 8.0
