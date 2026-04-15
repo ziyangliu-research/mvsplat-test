@@ -30,6 +30,7 @@ REQUIRED_PACKET_FIELDS = {
     "background_color",
     "context_index",
     "target_index",
+    "target_camera_id",
 }
 
 
@@ -232,7 +233,11 @@ def validate_packet(packet: dict[str, Any], path: Path) -> None:
         raise ValueError(
             f"Packet '{path}' has invalid background_color shape {tuple(background_color.shape)}."
         )
+    
+    target_camera_id = packet["target_camera_id"]
 
+    if target_extrinsics.shape[0] != target_camera_id.shape[0]:
+        raise ValueError(f"Packet '{path}' target view counts do not match.")
 
 def load_packets(packet_dir: Path) -> list[LoadedPacket]:
     if not packet_dir.exists():
@@ -438,7 +443,13 @@ def main() -> None:
         for render_idx, (job, rendered_image, gt_image) in enumerate(zip(jobs, rendered, gt_images)):
             target_index = int(job.packet.data["target_index"][job.target_idx].item())
             packet_stem = job.packet.path.stem
-            filename = f"k_{k:03d}_{packet_stem}_target_{target_index:06d}_view_{render_idx:03d}.png"
+            cam_id = int(job.packet.data["target_camera_id"][job.target_idx].item())
+            camera_tag = "left" if cam_id == 0 else "right"
+
+            filename = (
+                f"k_{k:03d}_{packet_stem}_target_{target_index:06d}_{camera_tag}_"
+                f"view_{render_idx:03d}.png"
+            )
 
             save_png_tensor(rendered_image, images_dir / filename)
             save_png_tensor(gt_image, gt_dir / filename)

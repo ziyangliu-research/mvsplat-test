@@ -3,7 +3,7 @@ defaults:
 
 name: tum_orb
 stereo_as_context: true
-target_camera: left
+target_camera: both
 left_camera_dirname: cam0/data
 right_camera_dirname: cam1/data
 left_sensor_yaml: cam0/sensor.yaml

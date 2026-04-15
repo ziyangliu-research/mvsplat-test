@@ -46,7 +46,7 @@ class DatasetTUMORBCfg(DatasetCfgCommon):
     right_camera_dirname: str = "cam1/data"
     left_sensor_yaml: str = "cam0/sensor.yaml"
     right_sensor_yaml: str = "cam1/sensor.yaml"
-    target_camera: Literal["left", "right"] = "left"
+    target_camera: Literal["left", "right", "both"] = "left"
 
     pose_time_tolerance: float = 0.02
 
@@ -505,40 +505,71 @@ class DatasetTUMORB(Dataset):
         if self.cfg.stereo_as_context:
             all_extrinsics = torch.stack([x["left_extrinsics"] for x in samples], dim=0)
             dummy_intrinsics = torch.stack([x["left_K"] for x in samples], dim=0)
-            context_indices, target_indices = self.view_sampler.sample(scene_key, all_extrinsics, dummy_intrinsics)
+            context_indices, target_indices = self.view_sampler.sample(
+                scene_key, all_extrinsics, dummy_intrinsics
+            )
 
+            # ---------- context ----------
             context_images = []
             context_intrinsics = []
             context_extrinsics = []
             for i in context_indices.tolist():
                 sample = samples[i]
-                img_l, K_l = self._process_image_and_K(sample["left_image_path"], self._base_pixel_K_from_sample(sample, "left"))
-                img_r, K_r = self._process_image_and_K(sample["right_image_path"], self._base_pixel_K_from_sample(sample, "right"))
+                img_l, K_l = self._process_image_and_K(
+                    sample["left_image_path"],
+                    self._base_pixel_K_from_sample(sample, "left"),
+                )
+                img_r, K_r = self._process_image_and_K(
+                    sample["right_image_path"],
+                    self._base_pixel_K_from_sample(sample, "right"),
+                )
                 context_images.extend([img_l, img_r])
                 context_intrinsics.extend([K_l, K_r])
-                context_extrinsics.extend([sample["left_extrinsics"], sample["right_extrinsics"]])
+                context_extrinsics.extend(
+                    [sample["left_extrinsics"], sample["right_extrinsics"]]
+                )
 
+            context_images = torch.stack(context_images, dim=0)
+            context_intrinsics = torch.stack(context_intrinsics, dim=0)
+            context_extrinsics = torch.stack(context_extrinsics, dim=0)
+
+            # ---------- target ----------
             target_images = []
             target_intrinsics = []
             target_extrinsics = []
+            target_index_expanded = []
+            target_camera_id = []
+
             for i in target_indices.tolist():
                 sample = samples[i]
-                if self.cfg.target_camera == "left":
-                    img, K = self._process_image_and_K(sample["left_image_path"], self._base_pixel_K_from_sample(sample, "left"))
-                    extr = sample["left_extrinsics"]
-                else:
-                    img, K = self._process_image_and_K(sample["right_image_path"], self._base_pixel_K_from_sample(sample, "right"))
-                    extr = sample["right_extrinsics"]
-                target_images.append(img)
-                target_intrinsics.append(K)
-                target_extrinsics.append(extr)
 
-            context_images = torch.stack(context_images, dim=0)
+                if self.cfg.target_camera in ("left", "both"):
+                    img_l, K_l = self._process_image_and_K(
+                        sample["left_image_path"],
+                        self._base_pixel_K_from_sample(sample, "left"),
+                    )
+                    target_images.append(img_l)
+                    target_intrinsics.append(K_l)
+                    target_extrinsics.append(sample["left_extrinsics"])
+                    target_index_expanded.append(i)
+                    target_camera_id.append(0)   # left
+
+                if self.cfg.target_camera in ("right", "both"):
+                    img_r, K_r = self._process_image_and_K(
+                        sample["right_image_path"],
+                        self._base_pixel_K_from_sample(sample, "right"),
+                    )
+                    target_images.append(img_r)
+                    target_intrinsics.append(K_r)
+                    target_extrinsics.append(sample["right_extrinsics"])
+                    target_index_expanded.append(i)
+                    target_camera_id.append(1)   # right
+
             target_images = torch.stack(target_images, dim=0)
-            context_intrinsics = torch.stack(context_intrinsics, dim=0)
             target_intrinsics = torch.stack(target_intrinsics, dim=0)
-            context_extrinsics = torch.stack(context_extrinsics, dim=0)
             target_extrinsics = torch.stack(target_extrinsics, dim=0)
+            target_index_expanded = torch.tensor(target_index_expanded, dtype=torch.long)
+            target_camera_id = torch.tensor(target_camera_id, dtype=torch.long)
 
             example = {
                 "context": {
@@ -555,7 +586,8 @@ class DatasetTUMORB(Dataset):
                     "image": target_images,
                     "near": self._get_bound(self.cfg.near, target_images.shape[0]),
                     "far": self._get_bound(self.cfg.far, target_images.shape[0]),
-                    "index": target_indices,
+                    "index": target_index_expanded,
+                    "camera_id": target_camera_id,
                 },
                 "scene": scene_key,
                 "scene_name": scene_name,

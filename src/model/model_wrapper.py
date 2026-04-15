@@ -219,8 +219,12 @@ class ModelWrapper(LightningModule):
 
         # Save images.
         if self.test_cfg.save_image:
-            for index, color in zip(batch["target"]["index"][0], images_prob):
-                save_image(color, path / scene / f"color/{index:0>6}.png")
+            target_indices = batch["target"]["index"][0]
+            target_camera_ids = batch["target"]["camera_id"][0]
+
+            for index, cam_id, color in zip(target_indices, target_camera_ids, images_prob):
+                camera_tag = "left" if int(cam_id.item()) == 0 else "right"
+                save_image(color, path / scene / f"color/{index:0>6}_{camera_tag}.png")
 
         # save video
         if self.test_cfg.save_video:
@@ -600,6 +604,7 @@ class ModelWrapper(LightningModule):
             "scene": scene,
             "context_index": batch["context"]["index"][0].detach().cpu(),
             "target_index": batch["target"]["index"][0].detach().cpu(),
+            "target_camera_id": batch["target"]["camera_id"][0].detach().cpu(),
             "context_extrinsics": batch["context"]["extrinsics"][0].detach().cpu(),
             "context_intrinsics": batch["context"]["intrinsics"][0].detach().cpu(),
             "target_extrinsics": batch["target"]["extrinsics"][0].detach().cpu(),
