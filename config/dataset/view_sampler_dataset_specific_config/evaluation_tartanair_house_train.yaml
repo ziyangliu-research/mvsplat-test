@@ -1,0 +1,8 @@
+# @package _global_
+
+# 只有当你把 dataset 的 defaults 改成 view_sampler: evaluation，
+# 并且准备好了 JSON index 时，这个文件才需要启用。
+dataset:
+  view_sampler:
+    index_path: assets/evaluation_index_tartanair_house.json
+    num_context_views: 1

@@ -1,0 +1,67 @@
+{
+  "P000_0000": {
+    "context": [
+      0
+    ],
+    "target": [
+      0
+    ],
+    "meta": {
+      "index": 0,
+      "stage": "test",
+      "kind": "same_view_debug"
+    }
+  },
+  "P000_0001": {
+    "context": [
+      10
+    ],
+    "target": [
+      10
+    ],
+    "meta": {
+      "index": 10,
+      "stage": "test",
+      "kind": "same_view_debug"
+    }
+  },
+  "P000_0002": {
+    "context": [
+      20
+    ],
+    "target": [
+      20
+    ],
+    "meta": {
+      "index": 20,
+      "stage": "test",
+      "kind": "same_view_debug"
+    }
+  },
+  "P000_0003": {
+    "context": [
+      30
+    ],
+    "target": [
+      30
+    ],
+    "meta": {
+      "index": 30,
+      "stage": "test",
+      "kind": "same_view_debug"
+    }
+  },
+  "P000_0004": {
+    "context": [
+      40
+    ],
+    "target": [
+      40
+    ],
+    "meta": {
+      "index": 40,
+      "stage": "test",
+      "kind": "same_view_debug"
+    }
+  }
+}

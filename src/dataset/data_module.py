@@ -11,15 +11,9 @@ from torch.utils.data import DataLoader, Dataset, IterableDataset
 from ..misc.step_tracker import StepTracker
 from . import DatasetCfg, get_dataset
 from .types import DataShim, Stage
-from .validation_wrapper import ValidationWrapper
 
 
 def get_data_shim(encoder: nn.Module) -> DataShim:
-    """Get functions that modify the batch. It's sometimes necessary to modify batches
-    outside the data loader because GPU computations are required to modify the batch or
-    because the modification depends on something outside the data loader.
-    """
-
     shims: list[DataShim] = []
     if hasattr(encoder, "get_data_shim"):
         shims.append(encoder.get_data_shim())
@@ -54,7 +48,7 @@ def worker_init_fn(worker_id: int) -> None:
     random.seed(int(torch.utils.data.get_worker_info().seed) % (2**32 - 1))
     np.random.seed(int(torch.utils.data.get_worker_info().seed) % (2**32 - 1))
 
-# 把 dataset_cfg + data_loader_cfg 变成 PyTorch Lightning 能消费的 dataloader。
+
 class DataModule(LightningDataModule):
     dataset_cfg: DatasetCfg
     data_loader_cfg: DataLoaderCfg
@@ -71,7 +65,7 @@ class DataModule(LightningDataModule):
         global_rank: int = 0,
     ) -> None:
         super().__init__()
-        self.dataset_cfg = dataset_cfg # “该加载哪个数据集、以什么方式构造数据集对象” 的配置入口。
+        self.dataset_cfg = dataset_cfg
         self.data_loader_cfg = data_loader_cfg
         self.step_tracker = step_tracker
         self.dataset_shim = dataset_shim
@@ -93,7 +87,7 @@ class DataModule(LightningDataModule):
         return DataLoader(
             dataset,
             self.data_loader_cfg.train.batch_size,
-            shuffle=not isinstance(dataset, IterableDataset),
+            shuffle=False,
             num_workers=self.data_loader_cfg.train.num_workers,
             generator=self.get_generator(self.data_loader_cfg.train),
             worker_init_fn=worker_init_fn,
@@ -104,12 +98,13 @@ class DataModule(LightningDataModule):
         dataset = get_dataset(self.dataset_cfg, "val", self.step_tracker)
         dataset = self.dataset_shim(dataset, "val")
         return DataLoader(
-            ValidationWrapper(dataset, 1),
+            dataset,
             self.data_loader_cfg.val.batch_size,
             num_workers=self.data_loader_cfg.val.num_workers,
             generator=self.get_generator(self.data_loader_cfg.val),
             worker_init_fn=worker_init_fn,
             persistent_workers=self.get_persistent(self.data_loader_cfg.val),
+            shuffle=False,
         )
 
     def test_dataloader(self, dataset_cfg=None):
@@ -119,7 +114,6 @@ class DataModule(LightningDataModule):
             self.step_tracker,
         )
         dataset = self.dataset_shim(dataset, "test")
-        print(">>> DataModule.test_dataloader called")
         return DataLoader(
             dataset,
             self.data_loader_cfg.test.batch_size,

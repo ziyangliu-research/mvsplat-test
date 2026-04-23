@@ -1,0 +1,46 @@
+defaults:
+  - view_sampler: bounded
+
+name: tartanair
+stereo_as_context: true
+target_camera: both
+
+root: datasets/tartanair_v2/House/Data_easy/House/Data_easy
+auto_discover_sequences: true
+scene_glob: "P*"
+
+left_camera_dirname: image_lcam_front
+right_camera_dirname: image_rcam_front
+left_pose_filename: pose_lcam_front.txt
+right_pose_filename: pose_rcam_front.txt
+
+# 你贴出来的 pose 第一行更符合 tx ty tz qx qy qz qw
+pose_format: tx_ty_tz_qx_qy_qz_qw
+# 这里先按世界位姿处理；如果后面渲染/点云方向明显不对，再切成 Tcw
+pose_matrix_type: Twc
+
+# 这里先用 TartanAir 常见 pinhole 内参占位。
+# 如果你数据目录里有对应相机参数文件，后面再替换成真值。
+fx: 320.0
+fy: 320.0
+cx: 320.0
+cy: 320.0
+
+normalize_intrinsics: true
+image_shape: [320, 320]
+background_color: [0.0, 0.0, 0.0]
+cameras_are_circular: false
+overfit_to_scene: null
+
+frame_start: 0
+frame_stride: 1
+max_frames: -1
+strict_length_check: false
+test_len: -1
+
+train_split_ratio: 0.7
+val_split_ratio: 0.15
+test_split_ratio: 0.15
+
+near: 0.1
+far: 50.0
