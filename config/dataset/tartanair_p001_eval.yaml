@@ -1,0 +1,47 @@
+defaults:
+  - view_sampler: evaluation
+
+name: tartanair
+stereo_as_context: true
+target_camera: left
+
+sequences:
+  - scene: P001
+    root: datasets/tartanair_v2/House/Data_easy/House/Data_easy/P001
+    fx: 320.0
+    fy: 320.0
+    cx: 320.0
+    cy: 320.0
+
+left_camera_dirname: image_lcam_front
+right_camera_dirname: image_rcam_front
+left_pose_filename: pose_lcam_front.txt
+right_pose_filename: pose_rcam_front.txt
+
+pose_format: tx_ty_tz_qx_qy_qz_qw
+pose_matrix_type: Twc
+
+view_sampler:
+  num_context_views: 1
+  train_index_path: assets/tartanair/house_p001_pairs_contiguous/P001_train.json
+  val_index_path: assets/tartanair/house_p001_pairs_contiguous/P001_val.json
+  test_index_path: assets/tartanair/house_p001_pairs_contiguous/P001_test.json
+
+normalize_intrinsics: true
+image_shape: [320, 320]
+background_color: [0.0, 0.0, 0.0]
+cameras_are_circular: false
+overfit_to_scene: null
+
+frame_start: 0
+frame_stride: 1
+max_frames: -1
+strict_length_check: false
+test_len: -1
+
+train_split_ratio: 0.8
+val_split_ratio: 0.1
+test_split_ratio: 0.1
+
+near: 0.1
+far: 50.0

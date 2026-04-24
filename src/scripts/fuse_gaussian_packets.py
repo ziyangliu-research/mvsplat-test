@@ -176,8 +176,29 @@ def parse_args() -> argparse.Namespace:
         default=6,
         help="FPS for saved progress video.",
     )
-    return parser.parse_args()
 
+    parser.add_argument(
+        "--probe_image_shape",
+        type=int,
+        nargs=2,
+        default=None,
+        metavar=("H", "W"),
+        help="Override probe render image shape as H W, e.g. 320 640.",
+    )
+
+    parser.add_argument(
+        "--probe_intrinsics_norm",
+        type=float,
+        nargs=4,
+        default=None,
+        metavar=("FX", "FY", "CX", "CY"),
+        help=(
+            "Override normalized probe intrinsics as fx fy cx cy. "
+            "Example for 640x320 wide view: 0.25 0.5 0.5 0.5."
+        ),
+    )
+
+    return parser.parse_args()
 
 def canonicalize_scene_name(scene: str) -> str:
     parts = scene.rsplit("_", 1)
@@ -337,7 +358,7 @@ def validate_packet(packet: dict[str, Any], path: Path) -> None:
         )
 
 
-def load_packets(packet_dir: Path) -> list[LoadedPacket]:
+def load_packets(packet_dir: Path, max_packets: int | None = None) -> list[LoadedPacket]:
     if not packet_dir.exists():
         raise FileNotFoundError(f"packet_dir does not exist: {packet_dir}")
     if not packet_dir.is_dir():
@@ -346,6 +367,11 @@ def load_packets(packet_dir: Path) -> list[LoadedPacket]:
     packet_paths = sorted(packet_dir.glob("*.pt"))
     if not packet_paths:
         raise FileNotFoundError(f"No .pt packets found under: {packet_dir}")
+
+    if max_packets is not None:
+        packet_paths = packet_paths[:max_packets]
+
+    print(f"Loading {len(packet_paths)} packet(s) from {packet_dir}", flush=True)
 
     loaded_packets: list[LoadedPacket] = []
     for path in packet_paths:
@@ -425,63 +451,13 @@ def save_progress_video_safe(
     path: Path,
     fps: int = 10,
 ) -> tuple[bool, str]:
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    try:
-        save_video(frames, path)
-        return True, f"Saved MP4 to {path}"
-    except Exception as exc:
-        print(f"[warn] MP4 video export failed for {path}: {exc}")
-
-    frame_arrays = []
-    for frame in frames:
-        frame_arrays.append(prep_image(frame.detach().cpu().float()))
-
-    # Fallback 1: OpenCV MP4 writer.
-    try:
-        import cv2
-
-        h, w = frame_arrays[0].shape[:2]
-        writer = cv2.VideoWriter(
-            str(path),
-            cv2.VideoWriter_fourcc(*"mp4v"),
-            float(fps),
-            (w, h),
-        )
-        if not writer.isOpened():
-            raise RuntimeError("cv2.VideoWriter could not be opened")
-        for frame in frame_arrays:
-            if frame.shape[-1] == 4:
-                frame = frame[..., :3]
-            writer.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
-        writer.release()
-        return True, f"Saved MP4 via OpenCV fallback to {path}"
-    except Exception as exc:
-        print(f"[warn] OpenCV MP4 fallback failed for {path}: {exc}")
-
-    # Fallback 2: GIF.
-    gif_path = path.with_suffix(".gif")
-    try:
-        from PIL import Image
-
-        pil_frames = [Image.fromarray(frame[..., :3]) for frame in frame_arrays]
-        pil_frames[0].save(
-            gif_path,
-            save_all=True,
-            append_images=pil_frames[1:],
-            duration=max(1, int(round(1000 / fps))),
-            loop=0,
-        )
-        return False, f"MP4 export failed; saved GIF fallback to {gif_path}"
-    except Exception as exc:
-        print(f"[warn] GIF fallback failed for {gif_path}: {exc}")
-
-    # Final fallback: image sequence.
     frames_dir = path.parent / f"{path.stem}_frames"
     frames_dir.mkdir(parents=True, exist_ok=True)
-    for i, frame in enumerate(frames):
-        save_image(frame.detach().cpu().float(), frames_dir / f"frame_{i:04d}.png")
-    return False, f"Video export failed; saved PNG frame sequence to {frames_dir}"
+
+    # for i, frame in enumerate(frames):
+    #     save_image(frame.detach().cpu().float(), frames_dir / f"frame_{i:04d}.png")
+
+    return False, f"Saved PNG frame sequence to {frames_dir}"
 
 
 def plot_curve(x_values: list[int], y_values: list[float], title: str, ylabel: str, path: Path) -> None:
@@ -944,27 +920,40 @@ def custom_pose_probe_from_cfg(
     label: str,
     gt_image_path: Optional[Path],
     background_color_override: Optional[list[float]] = None,
+    image_shape_override: Optional[list[int]] = None,
+    intrinsics_norm_override: Optional[list[float]] = None,
 ) -> ProbeView:
     seq = dataset_cfg["sequence"]
     fx = float(seq["fx"])
     fy = float(seq["fy"])
     cx = float(seq["cx"])
     cy = float(seq["cy"])
-    image_shape = tuple(int(x) for x in dataset_cfg["image_shape"])
+    image_shape = (
+        tuple(int(x) for x in image_shape_override)
+        if image_shape_override is not None
+        else tuple(int(x) for x in dataset_cfg["image_shape"])
+    )
+
     normalize_intrinsics = bool(dataset_cfg.get("normalize_intrinsics", True))
     near = torch.tensor([float(dataset_cfg.get("near", 0.1))], dtype=torch.float32)
     far = torch.tensor([float(dataset_cfg.get("far", 50.0))], dtype=torch.float32)
 
-    dummy_width = int(image_shape[1])
-    dummy_height = int(image_shape[0])
-    # Build intrinsics in pixel coordinates, then apply the same normalize-to-image-shape logic as the dataset.
-    # Since there is no original image resize/crop for custom pose, only normalize when requested.
-    intrinsics = build_k(fx, fy, cx, cy)
-    if normalize_intrinsics:
-        intrinsics[0, 0] /= dummy_width
-        intrinsics[1, 1] /= dummy_height
-        intrinsics[0, 2] /= dummy_width
-        intrinsics[1, 2] /= dummy_height
+    if intrinsics_norm_override is not None:
+        fx_n, fy_n, cx_n, cy_n = [float(x) for x in intrinsics_norm_override]
+        intrinsics = torch.eye(3, dtype=torch.float32)
+        intrinsics[0, 0] = fx_n
+        intrinsics[1, 1] = fy_n
+        intrinsics[0, 2] = cx_n
+        intrinsics[1, 2] = cy_n
+    else:
+        dummy_width = int(image_shape[1])
+        dummy_height = int(image_shape[0])
+        intrinsics = build_k(fx, fy, cx, cy)
+        if normalize_intrinsics:
+            intrinsics[0, 0] /= dummy_width
+            intrinsics[1, 1] /= dummy_height
+            intrinsics[0, 2] /= dummy_width
+            intrinsics[1, 2] /= dummy_height
 
     if gt_image_path is not None:
         gt_image, _ = process_image_and_k(
@@ -1043,6 +1032,8 @@ def build_probes(
             label=args.probe_pose_json.stem,
             gt_image_path=args.gt_image_path,
             background_color_override=args.custom_background_color,
+            image_shape_override=args.probe_image_shape,
+            intrinsics_norm_override=args.probe_intrinsics_norm,
         )
         return probe, [probe]
     if args.probe_mode == "custom_pose_sequence":
@@ -1089,7 +1080,7 @@ def main() -> None:
         raise ValueError(f"--max_packets must be > 0, got {args.max_packets}")
 
     device = resolve_device(args.device)
-    packets = load_packets(args.packet_dir)
+    packets = load_packets(args.packet_dir, max_packets=args.max_packets)
     packet_image_shape = validate_packet_collection(packets)
 
     max_packets = min(args.max_packets, len(packets))
@@ -1122,6 +1113,7 @@ def main() -> None:
     curve_lpips: list[float] = []
 
     progress_frames: dict[str, list[torch.Tensor]] = {}
+    warned_probe_shape_mismatch = False
 
     for k in range(1, max_packets + 1):
         prefix_packets = packets[:k]
@@ -1132,11 +1124,13 @@ def main() -> None:
         if len(image_shapes) != 1:
             raise ValueError(f"All probes must share the same image shape, got {sorted(image_shapes)}")
         probe_image_shape = next(iter(image_shapes))
-        if tuple(probe_image_shape) != tuple(packet_image_shape):
+        if tuple(probe_image_shape) != tuple(packet_image_shape) and not warned_probe_shape_mismatch:
             print(
                 f"Warning: packet image_shape={packet_image_shape} differs from probe image_shape={probe_image_shape}. "
-                "This is allowed, but make sure your probe intrinsics and crop convention match the packet convention."
+                "This is allowed for custom visualization, but make sure your probe intrinsics/FOV are intentional.",
+                flush=True,
             )
+            warned_probe_shape_mismatch = True
 
         rendered = render_fused_views(fused=fused, probes=probes, device=device)
         metrics, gt_indices = compute_metrics_for_available_gt(
