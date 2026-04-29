@@ -74,7 +74,22 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--packet_dir", type=Path, required=True)
     parser.add_argument("--output_dir", type=Path, required=True)
-    parser.add_argument("--max_packets", type=int, required=True)
+    parser.add_argument(
+        "--max_packets",
+        type=int,
+        default=None,
+        help="Use the first N packets after sorting. Ignored if --packet_ranges is set.",
+    )
+
+    parser.add_argument(
+        "--packet_ranges",
+        type=str,
+        default=None,
+        help=(
+            "Comma-separated packet index ranges after filename sorting, e.g. "
+            "'0-20,300-500' or '0-20,35,300-500'. Inclusive ranges."
+        ),
+    )
     parser.add_argument("--device", type=str, default="cuda:0")
     parser.add_argument(
         "--compute_lpips",
@@ -357,21 +372,112 @@ def validate_packet(packet: dict[str, Any], path: Path) -> None:
             f"Packet '{path}' has invalid background_color shape {tuple(background_color.shape)}."
         )
 
+def parse_packet_ranges(spec: str, num_packets: int) -> list[int]:
+    """
+    Parse a range spec over sorted packet indices.
+    Example:
+      "0-20,300-500" -> [0,1,...,20,300,...,500]
+      "0-20,35,100-120" also works.
 
-def load_packets(packet_dir: Path, max_packets: int | None = None) -> list[LoadedPacket]:
+    Ranges are inclusive.
+    Duplicate indices are removed while preserving order.
+    """
+    if spec is None or spec.strip() == "":
+        raise ValueError("Empty --packet_ranges spec.")
+
+    selected: list[int] = []
+    seen: set[int] = set()
+
+    for part in spec.split(","):
+        part = part.strip()
+        if not part:
+            continue
+
+        if "-" in part:
+            pieces = part.split("-")
+            if len(pieces) != 2:
+                raise ValueError(f"Invalid packet range item: '{part}'")
+            start = int(pieces[0])
+            end = int(pieces[1])
+            if start > end:
+                raise ValueError(f"Invalid packet range '{part}': start > end")
+            indices = range(start, end + 1)
+        else:
+            idx = int(part)
+            indices = [idx]
+
+        for idx in indices:
+            if idx < 0 or idx >= num_packets:
+                raise IndexError(
+                    f"Packet index {idx} out of range. "
+                    f"Available sorted packet indices: 0..{num_packets - 1}"
+                )
+            if idx not in seen:
+                selected.append(idx)
+                seen.add(idx)
+
+    if not selected:
+        raise ValueError(f"No packet indices selected from --packet_ranges='{spec}'")
+
+    return selected
+
+
+def select_packet_paths(
+    packet_dir: Path,
+    max_packets: int | None,
+    packet_ranges: str | None,
+) -> list[Path]:
     if not packet_dir.exists():
         raise FileNotFoundError(f"packet_dir does not exist: {packet_dir}")
     if not packet_dir.is_dir():
         raise NotADirectoryError(f"packet_dir is not a directory: {packet_dir}")
 
-    packet_paths = sorted(packet_dir.glob("*.pt"))
-    if not packet_paths:
+    packet_paths_all = sorted(packet_dir.glob("*.pt"))
+    if not packet_paths_all:
         raise FileNotFoundError(f"No .pt packets found under: {packet_dir}")
 
-    if max_packets is not None:
-        packet_paths = packet_paths[:max_packets]
+    if packet_ranges is not None:
+        selected_indices = parse_packet_ranges(packet_ranges, len(packet_paths_all))
+        packet_paths = [packet_paths_all[i] for i in selected_indices]
+        print(
+            f"Selected {len(packet_paths)} packet(s) by ranges '{packet_ranges}' "
+            f"from {len(packet_paths_all)} available packet(s).",
+            flush=True,
+        )
+        print(
+            "Selected sorted packet indices: "
+            + ",".join(str(i) for i in selected_indices[:30])
+            + ("..." if len(selected_indices) > 30 else ""),
+            flush=True,
+        )
+        return packet_paths
 
-    print(f"Loading {len(packet_paths)} packet(s) from {packet_dir}", flush=True)
+    if max_packets is None:
+        raise ValueError("Either --max_packets or --packet_ranges must be specified.")
+
+    if max_packets <= 0:
+        raise ValueError(f"--max_packets must be > 0, got {max_packets}")
+
+    packet_paths = packet_paths_all[:max_packets]
+    print(
+        f"Selected first {len(packet_paths)} packet(s) "
+        f"from {len(packet_paths_all)} available packet(s).",
+        flush=True,
+    )
+    return packet_paths
+
+def load_packets(
+    packet_dir: Path,
+    max_packets: int | None = None,
+    packet_ranges: str | None = None,
+) -> list[LoadedPacket]:
+    packet_paths = select_packet_paths(
+        packet_dir=packet_dir,
+        max_packets=max_packets,
+        packet_ranges=packet_ranges,
+    )
+
+    print(f"Loading {len(packet_paths)} selected packet(s) from {packet_dir}", flush=True)
 
     loaded_packets: list[LoadedPacket] = []
     for path in packet_paths:
@@ -1076,19 +1182,21 @@ def probes_for_prefix(
 
 def main() -> None:
     args = parse_args()
-    if args.max_packets <= 0:
+    if args.max_packets is not None and args.max_packets <= 0:
         raise ValueError(f"--max_packets must be > 0, got {args.max_packets}")
 
+    if args.max_packets is None and args.packet_ranges is None:
+        raise ValueError("Either --max_packets or --packet_ranges must be specified.")
+
     device = resolve_device(args.device)
-    packets = load_packets(args.packet_dir, max_packets=args.max_packets)
+    packets = load_packets(
+        args.packet_dir,
+        max_packets=args.max_packets,
+        packet_ranges=args.packet_ranges,
+    )
     packet_image_shape = validate_packet_collection(packets)
 
-    max_packets = min(args.max_packets, len(packets))
-    if max_packets < args.max_packets:
-        print(
-            f"Requested max_packets={args.max_packets}, but only found {len(packets)} packet(s). "
-            f"Processing {max_packets} prefix step(s)."
-        )
+    max_packets = len(packets)
 
     fixed_probe, fixed_probe_sequence = build_probes(args, packets)
     if fixed_probe is not None:
@@ -1208,7 +1316,7 @@ def main() -> None:
                 f"[{k}/{max_packets}] fused {k} packet(s) -> {int(fused.means.shape[1])} gaussians, "
                 f"rendered {len(rendered_filenames)} probe view(s), no GT available."
             )
-            print(log_message)
+            # print(log_message)
 
         summary_steps.append(step_summary)
 
@@ -1258,6 +1366,8 @@ def main() -> None:
         "packet_dir": str(args.packet_dir),
         "output_dir": str(args.output_dir),
         "probe_mode": args.probe_mode,
+        "packet_ranges": args.packet_ranges,
+        "selected_packet_count": len(packets),
         "compute_lpips": bool(args.compute_lpips),
         "device": str(device),
         "available_packets": len(packets),

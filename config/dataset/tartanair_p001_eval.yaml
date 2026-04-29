@@ -44,4 +44,4 @@ val_split_ratio: 0.1
 test_split_ratio: 0.1
 
 near: 0.1
-far: 50.0
+far: 30.0
